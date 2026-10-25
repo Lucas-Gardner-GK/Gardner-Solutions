@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0B1628">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kveldsfri">
+<meta name="format-detection" content="telephone=no">
+<title>Kveldsfri – prøv appen</title>
+<meta name="description" content="Snakk inn jobben, ta bilder og få ferdig tilbud på minutter. Trykk deg gjennom Kveldsfri-appen.">
+<meta property="og:title" content="Kveldsfri – prøv appen">
+<meta property="og:description" content="Snakk inn jobben, ta bilder og få ferdig tilbud på minutter.">
+<meta property="og:image" content="https://gardnersolutions.no/kveldsfri/og.jpg">
+<meta property="og:url" content="https://gardnersolutions.no/kveldsfri/app/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&display=swap">
+<link rel="preload" as="image" href="bilder/1-terrassen.jpg">
+<style>
+:root{
+  --bg:#0B1628;--card:#12223B;--card2:#0F1D33;--line:#22365A;--tx:#F1F5F9;--mut:#94A3B8;--dim:#64748B;
+  --g1:#F59E0B;--g2:#FCD34D;--ink:#1A1206;--cy:#22D3EE;--bl:#3B82F6;
+  --gold:linear-gradient(100deg,#F59E0B,#FCD34D);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --sp-pop:cubic-bezier(.34,1.56,.64,1);
+  --st:0px;               /* statuslinje */
+  --sb:max(env(safe-area-inset-bottom),14px);
+  --top:max(env(safe-area-inset-top),6px);
+  --hd:52px;              /* topplinje i appen */
+  --ctah:60px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overscroll-behavior:none}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--tx);-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01";
+  -webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow:hidden;text-rendering:optimizeLegibility}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.num,.tn{font-feature-settings:"tnum","cv11","ss01";font-variant-numeric:tabular-nums}
+
+/* ---------- Ramme: mobil = hele skjermen, PC = telefon i ramme ---------- */
+#desk{position:fixed;inset:0}
+#device{position:absolute;inset:0}
+#app{position:absolute;inset:0;overflow:hidden;background:var(--bg);isolation:isolate;contain:layout paint}
+.deskonly{display:none}
+@media (min-width:620px) and (min-height:600px){
+  :root{--st:50px;--sb:30px;--top:0px}
+  #desk{display:grid;place-items:center;background:
+    radial-gradient(900px 700px at 78% 18%,rgba(59,130,246,.16),transparent 70%),
+    radial-gradient(800px 800px at 12% 85%,rgba(34,211,238,.08),transparent 70%),
+    radial-gradient(900px 600px at 50% 110%,rgba(245,158,11,.10),transparent 70%),#08111F}
+  #desk::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(148,163,184,.10) 1.2px,transparent 1.4px);background-size:28px 28px;
+    -webkit-mask-image:radial-gradient(700px 600px at 50% 50%,#000 20%,transparent 75%);mask-image:radial-gradient(700px 600px at 50% 50%,#000 20%,transparent 75%)}
+  #device{position:absolute;inset:auto;left:50%;top:50%;width:418px;height:872px;border-radius:66px;padding:14px;background:#030304;transform:translate(-50%,-50%) scale(var(--s,1));
+    box-shadow:0 0 0 2px #3a3f47,0 0 0 4px #1b1d22,0 0 0 5px rgba(255,255,255,.08),0 60px 120px rgba(0,0,0,.6),0 20px 40px rgba(0,0,0,.4)}
+  #device::after{content:"";position:absolute;inset:-4px;border-radius:70px;pointer-events:none;background:linear-gradient(150deg,rgba(255,255,255,.18),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 70%,rgba(255,255,255,.08));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:4px}
+  #app{position:relative;inset:auto;width:390px;height:844px;border-radius:52px}
+  .deskonly{display:block}
+  .btn-side{position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#2a2d33,#4d525b)}
+  #deskcap{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:13px;color:#5b6b85;font-weight:600;letter-spacing:.01em}
+}
+#sbar{position:absolute;left:0;right:0;top:0;height:50px;z-index:80;display:none;align-items:center;justify-content:space-between;padding:4px 30px 0 44px;font-weight:650;font-size:16px;letter-spacing:-.01em;pointer-events:none}
+#sbar .ic{display:flex;gap:6px;align-items:center}
+#island{position:absolute;left:50%;top:11px;width:122px;height:35px;margin-left:-61px;border-radius:20px;background:#000;z-index:81;display:none}
+#homeind{position:absolute;left:50%;bottom:8px;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:#fff;opacity:.85;z-index:81;display:none;pointer-events:none}
+@media (min-width:620px) and (min-height:600px){#sbar{display:flex}#island,#homeind{display:block}}
+
+/* ---------- Topplinje ---------- */
+#top{position:absolute;left:0;right:0;top:calc(var(--st) + var(--top));height:var(--hd);z-index:40;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 8px;pointer-events:none}
+#top>*{pointer-events:auto}
+#back{width:48px;height:48px;border-radius:24px;display:grid;place-items:center;opacity:0;transform:translateX(-8px);transition:opacity .35s var(--ease),transform .5s var(--ease);pointer-events:none}
+#back.on{opacity:1;transform:none;pointer-events:auto}
+#back svg{width:24px;height:24px}
+#ctx{position:absolute;left:50%;top:50%;display:flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 10px;border-radius:17px;background:rgba(18,34,59,.9);border:1px solid var(--line);
+  font-size:14px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+#ctx i{width:18px;height:18px;border-radius:50%;background:var(--card2);border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:9px;font-weight:800;color:var(--g2)}
+#ctx span{color:var(--mut);font-weight:600}
+#demo{height:24px;padding:0 9px;border-radius:12px;border:1px solid rgba(148,163,184,.28);color:var(--mut);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;pointer-events:none}
+#demo i{width:5px;height:5px;border-radius:50%;background:var(--cy);box-shadow:0 0 8px var(--cy)}
+
+/* ---------- Skjermer ---------- */
+#screens{position:absolute;left:0;right:0;top:calc(var(--st) + var(--top) + var(--hd));bottom:0}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;padding:4px 20px calc(var(--sb) + var(--ctah) + 28px);visibility:hidden;pointer-events:none;will-change:transform,opacity}
+.scr.on{visibility:visible;pointer-events:auto}
+.scr.out{pointer-events:none}
+.scr.nocta{padding-bottom:calc(var(--sb) + 16px)}
+.h1{font-size:30px;font-weight:850;letter-spacing:-.035em;line-height:1.08}
+.sub{font-size:15px;color:var(--mut);font-weight:500;line-height:1.4;margin-top:6px;letter-spacing:-.005em}
+.lbl{font-size:13px;font-weight:650;color:var(--mut);margin:0 0 7px 2px;letter-spacing:-.005em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px}
+.grow{flex:1 1 auto;min-height:8px}
+.press{transition:transform .55s var(--sp-pop)}
+.press.down{transform:scale(.955);transition:transform .14s var(--ease)}
+
+/* knapp */
+#cta{position:absolute;left:20px;right:20px;bottom:calc(var(--sb) + 14px);height:var(--ctah);z-index:45;border-radius:20px;color:var(--ink);font-size:18px;font-weight:800;letter-spacing:-.02em;
+  display:grid;place-items:center;visibility:hidden}
+#cta .bg{position:absolute;inset:0;border-radius:20px;background:var(--gold);box-shadow:0 12px 34px -8px rgba(245,158,11,.5),inset 0 1px 0 rgba(255,255,255,.35);transform-origin:0 0}
+#cta .lab{position:relative;display:flex;align-items:center;gap:10px;white-space:nowrap;grid-area:1/1}
+#cta .lab svg{width:20px;height:20px}
+#cta.off{pointer-events:none}
+#cta.wait .bg{filter:saturate(.4) brightness(.6)}
+#cta.wait .lab{opacity:.6}
+#cta.off .bg{filter:saturate(.35) brightness(.55)}
+#cta.off .lab{opacity:.55}
+.bg,.lab{transition:opacity .3s,filter .4s}
+
+/* ---------- 1 Start ---------- */
+.wm{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;color:var(--mut);letter-spacing:-.02em;margin:2px 0 18px 2px}
+.dot{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#FCD34D,#22D3EE 46%,#3B82F6 82%);box-shadow:0 0 14px rgba(34,211,238,.55);flex:none}
+#s-start .h1{font-size:34px;font-weight:900;letter-spacing:-.045em}
+.week{display:flex;gap:10px;margin-top:18px}
+.week div{flex:1;padding:12px 14px;border-radius:16px;background:rgba(18,34,59,.6);border:1px solid var(--line)}
+.week b{display:block;font-size:22px;font-weight:850;letter-spacing:-.03em}
+.week span{font-size:12px;color:var(--mut);font-weight:600}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 14px 0 16px}
+.item b{display:block;font-size:16px;font-weight:700;letter-spacing:-.015em}
+.item small{font-size:13px;color:var(--mut);font-weight:500}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:14px;font-size:12.5px;font-weight:750;white-space:nowrap}
+.c-sendt{background:#22365A;color:#CBD5E1}
+.c-apnet{background:rgba(34,211,238,.14);color:var(--cy)}
+.c-godtatt{background:var(--gold);color:var(--ink)}
+#nyBtn{position:relative;display:flex;align-items:center;gap:16px;height:96px;margin-top:16px;padding:0 20px;border-radius:26px;color:var(--ink);text-align:left;flex:none}
+#nyBtn .bg2{position:absolute;inset:0;border-radius:26px;background:var(--gold);box-shadow:0 16px 40px -10px rgba(245,158,11,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+#nyBtn .pl{position:relative;width:56px;height:56px;border-radius:50%;background:var(--ink);color:var(--g2);display:grid;place-items:center;flex:none}
+#nyBtn .pl svg{width:26px;height:26px}
+#nyBtn .tx{position:relative}
+#nyBtn b{display:block;font-size:24px;font-weight:900;letter-spacing:-.035em}
+#nyBtn .tx span{font-size:14px;font-weight:650;opacity:.72}
+
+/* ---------- 2 Kunde ---------- */
+.field{display:flex;align-items:center;gap:10px;height:56px;padding:0 16px;font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:14px;position:relative}
+.field .ph{color:#4b5d7a}
+.caret{display:inline-block;width:2px;height:22px;background:var(--g2);margin-left:1px;border-radius:1px;animation:blink 1s steps(1) infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+#map{position:relative;flex:1 1 140px;min-height:110px;max-height:260px;overflow:hidden;margin-bottom:12px}
+#map svg.m{position:absolute;inset:0;width:100%;height:100%}
+#pin{position:absolute;left:50%;top:50%;width:34px;height:46px;margin:-46px 0 0 -17px;transform-origin:50% 100%;opacity:0}
+#pinring{position:absolute;left:50%;top:50%;width:56px;height:22px;margin:-11px 0 0 -28px;border-radius:50%;border:2px solid var(--g2);opacity:0}
+#pinshadow{position:absolute;left:50%;top:50%;width:18px;height:6px;margin:-3px 0 0 -9px;border-radius:50%;background:rgba(0,0,0,.5);opacity:0}
+.adrcol{display:flex;flex-direction:column;gap:3px;min-width:0}
+.adrfield{height:66px}
+.tag{align-self:flex-start;font-size:12px;font-weight:750;color:var(--cy);white-space:nowrap;opacity:0;transform-origin:0 50%}
+#kAdr{font-size:16px}
+
+/* ---------- 3 Snakk ---------- */
+#trans{flex:1 1 auto;min-height:150px;margin-top:16px;padding:18px 18px 16px;font-size:21px;font-weight:700;line-height:1.36;letter-spacing:-.02em;overflow:hidden;display:flex;flex-direction:column;position:relative}
+#trans .ph{color:#4b5d7a;font-weight:600;font-size:17px;line-height:1.45}
+#words .w{display:inline-block;opacity:0}
+#understood{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px}
+#understood span{height:26px;padding:0 9px;border-radius:13px;background:rgba(34,211,238,.12);color:var(--cy);font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;opacity:0;white-space:nowrap}
+#understood span.k{background:rgba(245,158,11,.14);color:var(--g2)}
+#wave{height:44px;display:flex;align-items:center;justify-content:center;gap:4px;margin:14px 0 6px}
+#wave i{width:5px;height:44px;border-radius:3px;background:linear-gradient(180deg,#22D3EE,#3B82F6);transform:scaleY(.08);will-change:transform}
+#micwrap{position:relative;height:112px;display:grid;place-items:center;flex:none}
+#mic{position:relative;width:96px;height:96px;border-radius:50%;background:var(--gold);display:grid;place-items:center;touch-action:none;box-shadow:0 14px 40px -6px rgba(245,158,11,.55),inset 0 1px 0 rgba(255,255,255,.4);z-index:2;transition:transform .5s var(--sp-pop)}
+#mic.hold{transform:scale(.9);transition:transform .16s var(--ease)}
+#mic svg{width:40px;height:40px}
+.ring{position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:2px solid var(--g2);opacity:0;pointer-events:none}
+#micHint{text-align:center;font-size:14px;font-weight:650;color:var(--mut);height:20px;margin-top:2px;position:relative}
+#micHint span{position:absolute;left:0;right:0}
+
+/* ---------- 4 Bilder ---------- */
+.photos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px}
+.ph-big{grid-column:1/4;aspect-ratio:4/3;max-height:42vh}
+.photo{position:relative;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line);opacity:0}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo .fl{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.ph-sm{aspect-ratio:1/1}
+.addph{display:grid;place-items:center;align-content:center;gap:6px;color:var(--mut);font-size:12px;font-weight:700;border:1.5px dashed #2c4470;background:transparent;opacity:0}
+.addph svg{width:24px;height:24px}
+#mlineSvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#mlab{position:absolute;padding:5px 11px;border-radius:12px;background:var(--gold);color:var(--ink);font-size:16px;font-weight:900;white-space:nowrap;opacity:0;box-shadow:0 6px 16px rgba(0,0,0,.35);letter-spacing:-.02em}
+#mnote{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--mut);font-weight:600;margin-top:12px;opacity:0}
+#mnote b{color:var(--g2);font-weight:800}
+
+/* ---------- 5 Lager ---------- */
+#s-lager{align-items:stretch;text-align:center}
+#s-lager .h1{font-size:26px;margin-top:6px}
+.orb-anchor{pointer-events:none}
+#oaLager{width:220px;height:220px;margin:18px auto 10px;flex:none}
+.checks{display:flex;flex-direction:column;gap:10px;text-align:left;margin-top:auto}
+.ck{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:rgba(18,34,59,.55);border:1px solid rgba(34,54,90,.7);opacity:.45;transition:opacity .4s}
+.ck.done{opacity:1}
+.ck .c{position:relative;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);flex:none}
+.ck .c .f{position:absolute;inset:-2px;border-radius:50%;background:var(--gold);transform:scale(0);opacity:0}
+.ck .c svg{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);overflow:visible}
+.ck .c path{stroke-dasharray:1;stroke-dashoffset:1}
+.ck b{display:block;font-size:16px;font-weight:750;letter-spacing:-.015em}
+.ck small{font-size:13px;color:var(--mut);font-weight:550}
+.ck .spin{position:absolute;inset:-2px;border-radius:50%;border:2px solid transparent;border-top-color:var(--cy);opacity:0;animation:spin .8s linear infinite}
+.ck.busy .spin{opacity:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+#tfk{font-size:12px;color:var(--dim);font-weight:600;margin-top:14px;letter-spacing:.02em}
+
+/* ---------- 6 Spørsmål ---------- */
+#oaQ{width:64px;height:64px;margin:8px 0 14px -4px;flex:none}
+.qlab{font-size:13px;font-weight:750;color:var(--cy);letter-spacing:.01em;margin-bottom:6px}
+#s-q .h1{font-size:34px;font-weight:900;letter-spacing:-.045em}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.opt{position:relative;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;border-radius:20px;background:var(--card);border:1px solid var(--line);font-size:20px;font-weight:800;letter-spacing:-.02em;text-align:left;overflow:hidden}
+.opt small{font-size:12.5px;font-weight:700;color:var(--g2)}
+.opt.pre{border-color:rgba(252,211,77,.55);box-shadow:inset 0 0 0 1px rgba(252,211,77,.25)}
+.opt .fill{position:absolute;inset:0;background:var(--gold);opacity:0;transform:scaleX(.2);transform-origin:var(--ox,50%) 50%}
+.opt .t,.opt small{position:relative}
+.opt.sel{color:var(--ink)}.opt.sel small{color:var(--ink)}
+
+/* ---------- 7 Gjennomgang ---------- */
+#s-review{padding-left:0;padding-right:0}
+#rscroll{position:relative;flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:2px 20px 14px;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 24px),transparent);mask-image:linear-gradient(#000 calc(100% - 24px),transparent)}
+#rscroll::-webkit-scrollbar{display:none}
+.firm{padding:16px;display:flex;flex-direction:column;gap:12px}
+.firm-top{display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(140deg,#1f3a63,#152a4a);border:1px solid #2c4b7a;display:grid;place-items:center;font-weight:900;font-size:15px;letter-spacing:-.04em;color:var(--g2);flex:none}
+.firm-top b{display:block;font-size:19px;font-weight:850;letter-spacing:-.03em}
+.firm-top small{font-size:12.5px;color:var(--mut);font-weight:550}
+.firm-job{font-size:14px;color:var(--mut);font-weight:550;line-height:1.4;border-top:1px solid var(--line);padding-top:11px}
+.firm-job b{color:var(--tx);font-weight:750}
+.mine{display:flex;gap:8px}
+.mine button{flex:1;height:44px;border-radius:13px;background:rgba(11,22,40,.6);border:1px solid var(--line);font-size:12.5px;font-weight:650;color:var(--mut);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 12px;line-height:1.2}
+.mine b{color:var(--tx);font-size:14.5px;font-weight:800}
+#hint{display:flex;align-items:center;gap:8px;margin:6px 22px 8px;flex:none;font-size:13.5px;font-weight:700;color:var(--g2)}
+#hint i{width:8px;height:8px;border-radius:50%;background:var(--g2);box-shadow:0 0 0 0 rgba(252,211,77,.6);animation:ping 1.6s var(--ease) infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(252,211,77,.55)}100%{box-shadow:0 0 0 12px rgba(252,211,77,0)}}
+.lines{margin-top:8px}
+.ln{position:relative;padding:14px 0 14px;border-bottom:1px solid #1a2d4c}
+.ln:last-child{border-bottom:0}
+.ln-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.ln-name{font-size:16px;font-weight:750;letter-spacing:-.018em;line-height:1.25}
+.ln-sum{font-size:16.5px;font-weight:800;white-space:nowrap;letter-spacing:-.02em}
+.ln-det{font-size:13px;color:var(--mut);font-weight:550;margin-top:3px}
+.ln-ctl{display:flex;align-items:center;gap:6px;margin-top:9px}
+.stp{width:48px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.stp svg{width:18px;height:18px}
+.stp:disabled{opacity:.35}
+.hrs{min-width:52px;text-align:center;font-size:17px;font-weight:800;letter-spacing:-.02em;overflow:hidden;height:24px;position:relative}
+.hrs b{display:inline-block;font-weight:850}
+.hrs small{font-size:13px;color:var(--mut);font-weight:650;margin-left:2px}
+.ln-math{margin-left:auto;text-align:right;font-size:12px;color:var(--dim);font-weight:600;line-height:1.35}
+.ln-math b{color:var(--mut);font-weight:700}
+.ln.guess{margin:0 -20px;padding-left:17px;padding-right:20px;border-left:3px solid var(--g1);background:linear-gradient(90deg,rgba(245,158,11,.09),rgba(245,158,11,0) 75%)}
+.gtag{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:14px;margin-top:8px;background:rgba(245,158,11,.16);color:var(--g2);font-size:12.5px;font-weight:750;white-space:nowrap}
+.gtag.ok{background:rgba(34,211,238,.13);color:var(--cy)}
+.gtag svg{width:13px;height:13px}
+.ln .flash{position:absolute;inset:0;background:radial-gradient(60% 120% at 90% 30%,rgba(252,211,77,.14),transparent 70%);opacity:0;pointer-events:none}
+#tots{flex:none;margin:0 20px;padding:12px 2px 0;border-top:1px solid var(--line)}
+#tots .r{display:flex;justify-content:space-between;font-size:13.5px;color:var(--mut);font-weight:600;line-height:1.55}
+#tots .tt{display:flex;justify-content:space-between;align-items:baseline;margin-top:2px}
+#tots .tt>span:first-child{font-size:15px;font-weight:800}
+#totBig{position:relative;font-size:30px;font-weight:900;letter-spacing:-.045em;display:inline-block;transform-origin:100% 70%}
+#totBig .glow{position:absolute;inset:-6px -10px;border-radius:12px;background:radial-gradient(closest-side,rgba(252,211,77,.28),transparent);opacity:0;pointer-events:none}
+
+/* ---------- 8 Send ---------- */
+#sheetDim{position:absolute;inset:0;z-index:60;background:rgba(3,8,18,.62);opacity:0;visibility:hidden}
+#sheet{position:absolute;left:0;right:0;bottom:0;z-index:61;background:var(--card);border-top:1px solid var(--line);border-radius:30px 30px 0 0;padding:10px 20px calc(var(--sb) + 14px);visibility:hidden;box-shadow:0 -20px 60px rgba(0,0,0,.45)}
+#sheet .grab{width:38px;height:5px;border-radius:3px;background:#2e4670;margin:0 auto 16px}
+#sheet h2{font-size:24px;font-weight:850;letter-spacing:-.035em}
+#sheet .sub{margin:4px 0 16px}
+.so{position:relative;display:flex;align-items:center;gap:14px;width:100%;height:72px;padding:0 14px;border-radius:20px;border:1px solid var(--line);background:rgba(11,22,40,.45);margin-bottom:9px;text-align:left}
+.so i{width:44px;height:44px;border-radius:13px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.so i svg{width:22px;height:22px}
+.so b{display:block;font-size:16.5px;font-weight:750;letter-spacing:-.015em}
+.so span{font-size:13px;color:var(--mut);font-weight:550}
+.so em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:800;color:var(--ink);background:var(--gold);padding:5px 8px;border-radius:9px;white-space:nowrap}
+.so.rec{border-color:rgba(252,211,77,.5)}
+#sheetX{display:block;width:100%;height:48px;margin-top:2px;font-size:15px;font-weight:700;color:var(--mut)}
+
+/* ---------- 9 Sendt ---------- */
+#s-sent{text-align:center}
+#bigck{position:relative;width:96px;height:96px;margin:14px auto 18px;flex:none}
+#bigck .f{position:absolute;inset:0;border-radius:50%;background:var(--gold);box-shadow:0 14px 40px -8px rgba(245,158,11,.6)}
+#bigck svg{position:absolute;inset:24px;overflow:visible}
+#bigck path{stroke-dasharray:1;stroke-dashoffset:1}
+#s-sent .h1{font-size:30px;font-weight:900;letter-spacing:-.045em}
+.timepill{display:inline-flex;align-items:center;gap:8px;margin:16px auto 0;height:34px;padding:0 14px;border-radius:17px;background:rgba(34,211,238,.1);color:var(--cy);font-size:13.5px;font-weight:700}
+.msg{margin:14px 0 12px;text-align:left}
+.msg-l{font-size:12.5px;font-weight:700;color:var(--dim);margin:0 0 6px 4px}
+.bub{max-width:92%;padding:12px 14px;border-radius:20px 20px 20px 6px;background:#1E3354;font-size:14.5px;line-height:1.4;font-weight:500;color:#DCE4EE}
+.bl{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(11,22,40,.55);border:1px solid #2c4470;font-weight:750;color:var(--g2);font-size:14px}
+.bl b{color:var(--tx);font-weight:800}
+.track{padding:16px;text-align:left}
+.track-top{display:flex;justify-content:space-between;align-items:center}
+.track-top b{display:block;font-size:16px;font-weight:750;letter-spacing:-.015em}
+.track-top small{font-size:13px;color:var(--mut);font-weight:550}
+#tchipWrap{position:relative;height:28px;min-width:84px;display:flex;justify-content:flex-end}
+#tchipWrap .chip{position:absolute;right:0;top:0}
+.steps{display:flex;align-items:center;margin-top:16px}
+.stepi{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--dim);width:64px;flex:none}
+.stepi i{position:relative;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center}
+.stepi i em{position:absolute;inset:-2px;border-radius:50%;background:var(--gold);transform:scale(0)}
+.stepi i svg{position:relative;width:12px;height:12px;opacity:0}
+.stepi.on{color:var(--tx)}
+.stepi.on i svg{opacity:1}
+.bar{flex:1;height:2px;background:var(--line);border-radius:1px;margin:0 -14px 18px;position:relative;overflow:hidden}
+.bar em{position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:0 50%}
+
+/* varsel */
+#notif{position:absolute;left:10px;right:10px;top:calc(var(--st) + var(--top) + 6px);z-index:70;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:24px;
+  background:rgba(22,40,68,.92);border:1px solid rgba(148,163,184,.22);box-shadow:0 20px 50px rgba(0,0,0,.5);visibility:hidden;
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%)}
+#notif .ai{width:40px;height:40px;border-radius:11px;background:radial-gradient(circle at 38% 38%,#FCD34D,#22D3EE 46%,#3B82F6 82%);flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+#notif .nt{flex:1;min-width:0}
+#notif .nh{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.02em}
+#notif .nb{font-size:15.5px;font-weight:750;letter-spacing:-.015em;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- 10 Slutt ---------- */
+#s-slutt{text-align:center}
+#oaSlutt{width:150px;height:150px;margin:10px auto 18px;flex:none}
+#s-slutt .h1{font-size:38px;font-weight:900;letter-spacing:-.05em;line-height:1.02}
+.goldtx{background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+#s-slutt .sub{font-size:16px;margin:14px auto 0;max-width:320px}
+.facts{display:flex;flex-direction:column;gap:8px;margin:20px 0 0;text-align:left}
+.facts div{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:650;letter-spacing:-.01em}
+.facts i{width:24px;height:24px;border-radius:50%;background:rgba(245,158,11,.16);display:grid;place-items:center;flex:none}
+.facts i svg{width:12px;height:12px}
+.endbtns{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.gbtn{position:relative;display:grid;place-items:center;height:60px;border-radius:20px;background:var(--gold);color:var(--ink);font-size:18px;font-weight:850;letter-spacing:-.02em;text-decoration:none;box-shadow:0 12px 34px -8px rgba(245,158,11,.5),inset 0 1px 0 rgba(255,255,255,.35)}
+.obtn{display:grid;place-items:center;height:56px;border-radius:20px;border:1px solid var(--line);background:rgba(18,34,59,.6);font-size:16px;font-weight:750;color:var(--tx)}
+.foot{font-size:12px;color:var(--dim);font-weight:600;margin-top:12px}
+
+/* lag over alt */
+#orb{position:absolute;left:0;top:0;z-index:30;pointer-events:none}
+#fx{position:absolute;inset:0;z-index:29;pointer-events:none}
+#toast{position:absolute;left:20px;right:20px;top:calc(var(--st) + var(--top) + var(--hd) + 6px);z-index:75;display:flex;justify-content:center;pointer-events:none}
+#toast div{max-width:100%;padding:11px 16px;border-radius:16px;background:rgba(30,50,82,.96);border:1px solid #2e4670;font-size:14px;font-weight:650;line-height:1.35;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.45);opacity:0}
+
+@media (max-height:700px){
+  .h1{font-size:27px}#s-start .h1{font-size:30px}.week{margin-top:12px}.week div{padding:9px 12px}
+  #nyBtn{height:84px}#trans{font-size:19px;padding:14px}#oaLager{width:170px;height:170px;margin:8px auto}
+  .ck{padding:9px 12px}#bigck{width:76px;height:76px;margin:4px auto 12px}#bigck svg{inset:19px}#s-sent .h1{font-size:26px}.timepill{margin-top:10px}#s-slutt .h1{font-size:33px}#oaSlutt{width:110px;height:110px;margin:4px auto 12px}
+  .facts{margin-top:14px}.ln{padding:11px 0}
+}
+@media (prefers-reduced-motion:reduce){.caret{animation:none}#hint i{animation:none}.ck .spin{animation-duration:2s}}
+</style>
+</head>
+<body>
+<div id="desk">
+<div id="device">
+  <div class="deskonly btn-side" style="left:-6px;top:150px;height:32px"></div>
+  <div class="deskonly btn-side" style="left:-6px;top:210px;height:62px"></div>
+  <div class="deskonly btn-side" style="left:-6px;top:285px;height:62px"></div>
+  <div class="deskonly btn-side" style="right:-6px;top:230px;height:96px"></div>
+<div id="app">
+  <div id="sbar"><span class="tn" id="clock">18:41</span><span class="ic">
+    <svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".7" fill="#fff"/><rect x="5" y="5" width="3" height="6" rx=".7" fill="#fff"/><rect x="10" y="2.5" width="3" height="8.5" rx=".7" fill="#fff"/><rect x="15" y="0" width="3" height="11" rx=".7" fill="#fff"/></svg>
+    <svg width="16" height="12" viewBox="0 0 16 11.5"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.1-1.1A10 10 0 0 0 8 .7 10 10 0 0 0 .9 3.6L2 4.7a8.4 8.4 0 0 1 6-2.4zm0 3.2c1.4 0 2.7.5 3.7 1.4l1.1-1.1A7 7 0 0 0 8 3.9a7 7 0 0 0-4.8 1.9l1.1 1.1c1-.9 2.3-1.4 3.7-1.4zm0 3.2c.6 0 1.1.2 1.5.6L8 10.8 6.5 9.3c.4-.4.9-.6 1.5-.6z" fill="#fff"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3.2" fill="none" stroke="#fff" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="2" fill="#fff"/><path d="M23 4v4c.8-.3 1.3-1.1 1.3-2S23.8 4.3 23 4z" fill="#fff" opacity=".4"/></svg></span></div>
+  <div id="island"></div>
+
+  <div id="top">
+    <button id="back" aria-label="Tilbake"><svg viewBox="0 0 24 24" fill="none" stroke="#F1F5F9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div id="ctx"><i>KH</i>Kari Hansen</div>
+    <div id="demo"><i></i>Demo</div>
+  </div>
+
+  <div id="screens">
+    <!-- 1 Start -->
+    <section class="scr nocta" id="s-start">
+      <div class="wm st"><div class="dot"></div>Kveldsfri</div>
+      <h1 class="h1 st">God kveld,<br>Nordvik Tømrer.</h1>
+      <div class="week st"><div><b class="tn">4</b><span>tilbud sendt i uka</span></div><div><b class="tn">0</b><span>kvelder ved PC-en</span></div></div>
+      <div class="grow"></div>
+      <div class="lbl st">Siste tilbud</div>
+      <div class="list">
+        <div class="card item st"><div><b>Per Olsen</b><small class="tn">Nytt bad · 48&nbsp;200 kr</small></div><span class="chip c-godtatt">Godtatt</span></div>
+        <div class="card item st"><div><b>Ingrid Berg</b><small class="tn">Kledning · 112&nbsp;500 kr</small></div><span class="chip c-apnet">Åpnet</span></div>
+        <div class="card item st"><div><b>Tor Lie</b><small class="tn">Vinduer · 36&nbsp;900 kr</small></div><span class="chip c-sendt">Sendt</span></div>
+      </div>
+      <button id="nyBtn" class="press st"><span class="bg2"></span><span class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="tx"><b>Ny befaring</b><span>Snakk inn jobben og ta bilder</span></span></button>
+    </section>
+
+    <!-- 2 Kunde -->
+    <section class="scr" id="s-kunde">
+      <h1 class="h1 st">Ny befaring</h1>
+      <p class="sub st" style="margin-bottom:18px">Hvem er kunden?</p>
+      <div class="lbl st">Kunde</div>
+      <div class="card field st"><span id="kName"></span><span class="caret" id="kCaret"></span></div>
+      <div class="lbl st">Adresse</div>
+      <div class="card st" id="map">
+        <svg class="m" viewBox="0 0 350 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="350" height="180" fill="#0F1D33"/>
+          <path d="M-10 138 C50 122 90 160 150 150 S240 120 300 140 S360 170 380 160 V200 H-10Z" fill="#0C2B4D"/>
+          <g fill="#16294A" id="blocks"></g>
+          <g stroke="#2A4268" stroke-width="11" fill="none" stroke-linecap="round"><path d="M-10 58 L360 82"/><path d="M104 -10 L140 200"/><path d="M262 -10 C250 50 284 95 236 132"/></g>
+          <g stroke="#22365A" stroke-width="5" fill="none"><path d="M-10 112 L180 98 L360 118"/><path d="M40 -10 L58 130"/><path d="M318 -10 L330 140"/><path d="M175 20 L178 110"/></g>
+          <text x="196" y="66" fill="#4a6590" font-size="8.5" font-weight="700" font-family="Inter,sans-serif" transform="rotate(3.7 196 66)">Bjørkeveien</text>
+        </svg>
+        <div id="pinshadow"></div><div id="pinring"></div>
+        <svg id="pin" viewBox="0 0 34 46"><path d="M17 44.5S2 27 2 16a15 15 0 0 1 30 0c0 11-15 28.5-15 28.5z" fill="#F59E0B" stroke="#FCD34D" stroke-width="2"/><circle cx="17" cy="16" r="6" fill="#1A1206"/></svg>
+      </div>
+      <div class="card field adrfield st" style="margin-bottom:0"><svg width="18" height="22" viewBox="0 0 24 30" style="flex:none"><path d="M12 29S2 17 2 11a10 10 0 0 1 20 0c0 6-10 18-10 18z" fill="none" stroke="#FCD34D" stroke-width="2.5"/></svg><div class="adrcol"><span id="kAdr" class="ph">Henter fra kartet …</span><span class="tag" id="kTag">Fra kartnål</span></div></div>
+    </section>
+
+    <!-- 3 Snakk -->
+    <section class="scr" id="s-voice">
+      <h1 class="h1 st">Fortell om jobben</h1>
+      <p class="sub st">Hold inne knappen og snakk, som til en kollega.</p>
+      <div class="card st" id="trans"><div id="words"><span class="ph" id="tph">Teksten kommer her mens du snakker.</span></div><div id="understood"></div></div>
+      <div id="wave" class="st"></div>
+      <div id="micwrap" class="st"><div class="ring" id="r1"></div><div class="ring" id="r2"></div>
+        <button id="mic" aria-label="Hold inne og snakk"><svg viewBox="0 0 24 24"><rect x="8.5" y="2" width="7" height="12.5" rx="3.5" fill="#1A1206"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5" fill="none" stroke="#1A1206" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
+      <div id="micHint" class="st"><span>Hold inne</span></div>
+    </section>
+
+    <!-- 4 Bilder -->
+    <section class="scr" id="s-bilder">
+      <h1 class="h1 st">Bilder</h1>
+      <p class="sub st">Ta bilder av det du så. Mål kan du dra rett på bildet.</p>
+      <div class="photos">
+        <div class="photo ph-big" id="p1"><img src="bilder/1-terrassen.jpg" alt="Gammel terrasse" draggable="false">
+          <svg id="mlineSvg" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid slice"><g id="mline" stroke="#FCD34D" stroke-width="7" stroke-linecap="round" fill="none" style="filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))"></g></svg>
+          <div id="mlab">5 m</div><div class="fl"></div></div>
+        <div class="photo ph-sm" id="p2"><img src="bilder/2-raate.jpg" alt="Råte i bjelke" draggable="false"><div class="fl"></div></div>
+        <div class="photo ph-sm" id="p3"><img src="bilder/3-maaling.jpg" alt="Måling" draggable="false"><div class="fl"></div></div>
+        <button class="photo ph-sm addph press" id="addph"><svg viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linejoin="round"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg>Ta bilde</button>
+      </div>
+      <div id="mnote"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="2.4" stroke-linecap="round"><path d="M3 17L17 3l4 4L7 21H3z"/></svg><span>Målt på bildet: <b>5 m</b> langs forkanten</span></div>
+    </section>
+
+    <!-- 5 Lager -->
+    <section class="scr nocta" id="s-lager">
+      <h1 class="h1 st">Lager tilbudet</h1>
+      <div class="orb-anchor" id="oaLager"></div>
+      <div class="checks">
+        <div class="ck" id="ck1"><div class="c"><div class="spin"></div><div class="f"></div><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>Forstår jobben</b><small>Terrasse 5 × 5 m, rekkverk ca. 12 lm</small></div></div>
+        <div class="ck" id="ck2"><div class="c"><div class="spin"></div><div class="f"></div><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>Regner mengder og materialer</b><small>25 m² bord · bjelkelag c/c 60</small></div></div>
+        <div class="ck" id="ck3"><div class="c"><div class="spin"></div><div class="f"></div><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>Legger på din timepris og ditt påslag</b><small class="tn">650 kr/t · 12 % på materialer</small></div></div>
+      </div>
+      <div id="tfk">Tidsforkortet</div>
+    </section>
+
+    <!-- 6 Spørsmål -->
+    <section class="scr nocta" id="s-q">
+      <div class="orb-anchor" id="oaQ"></div>
+      <div class="qlab st">Ett spørsmål før tilbudet er klart</div>
+      <h1 class="h1 st">Hvor høyt rekkverk?</h1>
+      <p class="sub st">Du sa rundt tolv meter, men ikke høyden.</p>
+      <div class="opts">
+        <button class="opt press st" data-h="0.9"><span class="fill"></span><span class="t">0,9 m</span></button>
+        <button class="opt press pre st" data-h="1.0"><span class="fill"></span><span class="t">1,0 m</span><small>Du pleier å velge denne</small></button>
+        <button class="opt press st" data-h="annet"><span class="fill"></span><span class="t">Annet</span><small style="color:var(--mut)">Skriv inn selv</small></button>
+      </div>
+    </section>
+
+    <!-- 7 Gjennomgang -->
+    <section class="scr" id="s-review">
+      <div id="rscroll">
+        <div class="card firm st">
+          <div class="firm-top"><div class="logo">NT</div><div><b>Nordvik Tømrer AS</b><small>Tilbud til Kari Hansen</small></div></div>
+          <div class="firm-job"><b>Ny terrasse 5 × 5 m</b> med rekkverk<br>Bjørkeveien 12, Stavanger</div>
+          <div class="mine"><button class="press" data-toast="Timeprisen setter du selv. Den brukes på alle tilbud."><span>Din timepris</span><b class="tn">650 kr</b></button><button class="press" data-toast="Påslaget setter du selv. Det legges på alle materialer."><span>Ditt påslag</span><b class="tn">12 %</b></button></div>
+        </div>
+        <div class="lines" id="lines"></div>
+      </div>
+      <div id="hint"><i></i>Prøv selv: trykk + eller − på timene</div>
+      <div id="tots" class="st">
+        <div class="r"><span>Sum eks. mva</span><span class="tn"><span id="tSum">56 000</span> kr</span></div>
+        <div class="r"><span>Mva 25 %</span><span class="tn"><span id="tMva">14 000</span> kr</span></div>
+        <div class="tt"><span>Totalt</span><span id="totBig" class="tn"><span class="glow" id="totGlow"></span><span id="tTot">70 000</span> kr</span></div>
+      </div>
+    </section>
+
+    <!-- 9 Sendt / etterpå -->
+    <section class="scr" id="s-sent">
+      <div id="bigck"><div class="f"></div><svg viewBox="0 0 24 24"><path pathLength="1" d="M4.5 12.5l5 5L19.5 7" fill="none" stroke="#1A1206" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h1 class="h1 st" id="sentH">Sendt til Kari Hansen</h1>
+      <p class="sub st" id="sentSub">SMS-lenke til 912 34 567</p>
+      <div class="st"><span class="timepill"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Fra befaring til sendt: 11 minutter</span></div>
+      <div class="grow"></div>
+      <div class="msg st"><div class="msg-l" id="msgL">Det Kari fikk på SMS</div>
+        <div class="bub" id="bub">Hei Kari! Her er tilbudet på ny terrasse fra Nordvik Tømrer AS. Du kan se det og godta med ett trykk.<span class="bl"><span>Se tilbudet</span><b class="tn"><span id="bubTot">70 000</span> kr</b></span></div></div>
+      <div class="card track st">
+        <div class="track-top"><div><b>Kari Hansen</b><small class="tn">Terrasse · <span id="trTot">70 000</span> kr</small></div><div id="tchipWrap"><span class="chip c-sendt" id="tchip">Sendt</span></div></div>
+        <div class="steps">
+          <div class="stepi on" id="st1"><i><em style="transform:scale(1)"></em><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Sendt</div>
+          <div class="bar"><em id="b1"></em></div>
+          <div class="stepi" id="st2"><i><em></em><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Åpnet</div>
+          <div class="bar"><em id="b2"></em></div>
+          <div class="stepi" id="st3"><i><em></em><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#1A1206" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Godtatt</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Slutt -->
+    <section class="scr nocta" id="s-slutt">
+      <div class="orb-anchor" id="oaSlutt"></div>
+      <h1 class="h1 st">Dette er Kveldsfri.<br><span class="goldtx">Klar før nyttår.</span></h1>
+      <div class="facts">
+        <div class="st"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Snakk inn jobben rett etter befaringen</div>
+        <div class="st"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Ferdig tilbud på minutter, med ditt firmanavn</div>
+        <div class="st"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Du bestemmer timer, timepris og påslag</div>
+      </div>
+      <div class="endbtns">
+        <a class="gbtn press st" id="tryBtn" href="#">Vil prøve den først</a>
+        <button class="obtn press st" id="againBtn">Start demoen på nytt</button>
+        <div class="foot st">Gardner Solutions · Stavanger</div>
+      </div>
+    </section>
+  </div>
+
+  <div id="fx"></div>
+  <canvas id="orb"></canvas>
+  <button id="cta" class="press"><span class="bg"></span></button>
+
+  <div id="sheetDim"></div>
+  <div id="sheet" role="dialog" aria-label="Send tilbudet">
+    <div class="grab"></div>
+    <h2>Send tilbudet</h2>
+    <p class="sub">Går ut i navnet til Nordvik Tømrer AS.</p>
+    <button class="so press" data-v="epost"><i><svg viewBox="0 0 24 24" fill="none" stroke="#F1F5F9" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></i><div><b>E-post</b><span>PDF i e-post til Kari</span></div></button>
+    <button class="so press rec" data-v="sms"><i><svg viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></i><div><b>SMS-lenke</b><span>Godtas med ett trykk</span></div><em>Mest brukt</em></button>
+    <button class="so press" data-v="pdf"><i><svg viewBox="0 0 24 24" fill="none" stroke="#F1F5F9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></i><div><b>Last ned PDF</b><span>Del den selv</span></div></button>
+    <button id="sheetX">Avbryt</button>
+  </div>
+
+  <div id="notif"><div class="ai"></div><div class="nt"><div class="nh"><span>KVELDSFRI</span><span>nå</span></div><div class="nb" id="nb">Kari har åpnet tilbudet</div></div></div>
+  <div id="toast"><div id="toastIn"></div></div>
+  <div id="homeind"></div>
+</div>
+</div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const app = $('app');
+const RMQ = matchMedia('(prefers-reduced-motion: reduce)');
+const rm = () => RMQ.matches;
+const EASE = 'cubic-bezier(.16,1,.3,1)';
+const nf = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const buzz = p => { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} };
+
+/* ---------- Fjær: simuleres og gjøres om til en linear()-kurve ---------- */
+const HASLIN = window.CSS && CSS.supports && CSS.supports('transition-timing-function', 'linear(0, 1)');
+function spring(k, c) {
+  let x = 0, v = 0, t = 0; const dt = 1 / 240, pts = [0];
+  while (t < 2.5) { const a = -k * (x - 1) - c * v; v += a * dt; x += v * dt; t += dt; pts.push(x);
+    if (t > .2 && Math.abs(x - 1) < .0015 && Math.abs(v) < .02) break; }
+  const n = 40, out = [];
+  for (let i = 0; i < n; i++) out.push(+pts[Math.round(i * (pts.length - 1) / (n - 1))].toFixed(4));
+  out[n - 1] = 1;
+  return HASLIN ? { ease: `linear(${out.join(',')})`, dur: Math.round(t * 1000) }
+                : { ease: c / (2 * Math.sqrt(k)) < .7 ? 'cubic-bezier(.34,1.45,.64,1)' : EASE, dur: Math.min(700, Math.round(t * 1000)) };
+}
+const SP = { soft: spring(150, 24), pop: spring(300, 16), snap: spring(520, 32), wob: spring(240, 11) };
+document.documentElement.style.setProperty('--sp-pop', SP.pop.ease);
+
+// Animer fra -> til. Sluttverdien settes som vanlig stil, slik at ingenting "henger" igjen.
+function A(el, from, to, o = {}) {
+  if (!el) return null;
+  const sp = o.sp ? SP[o.sp] : null;
+  let dur = o.dur ?? (sp ? sp.dur : 520), ease = o.ease ?? (sp ? sp.ease : EASE);
+  if (rm()) { dur = Math.min(dur, 180); ease = 'ease-out';
+    if (from.transform) from = { ...from, transform: to.transform || 'none' }; }
+  for (const k in to) el.style[k] = to[k];
+  const an = el.animate([from, to], { duration: dur, easing: ease, delay: o.delay || 0, fill: 'backwards' });
+  if (to.transform === 'none') an.addEventListener('finish', () => { if (el.style.transform === 'none') el.style.transform = ''; });
+  return an;
+}
+function rectIn(el) {
+  const r = el.getBoundingClientRect(), a = app.getBoundingClientRect(), s = a.width / app.offsetWidth || 1;
+  return { x: (r.left - a.left) / s, y: (r.top - a.top) / s, w: r.width / s, h: r.height / s };
+}
+
+/* ---------- Tidsstyring: alt som hører til en skjerm stoppes når man går videre ---------- */
+let gen = 0;
+const W = (ms, g) => new Promise(r => setTimeout(() => r(g === gen), rm() ? Math.min(ms, ms * .5) : ms));
+
+/* ---------- Ramme på PC ---------- */
+const DESK = matchMedia('(min-width:620px) and (min-height:600px)');
+function fit() {
+  const s = DESK.matches ? Math.min(1, (innerHeight - 56) / 872, (innerWidth - 40) / 418) : 1;
+  $('device').style.setProperty('--s', s.toFixed(4));
+  orbResize();
+}
+
+/* ---------- Pressfølelse på knapper ---------- */
+document.addEventListener('pointerdown', e => {
+  const b = e.target.closest('.press'); if (!b || b.disabled) return;
+  b.classList.add('down');
+  const up = () => { b.classList.remove('down'); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); };
+  addEventListener('pointerup', up); addEventListener('pointercancel', up);
+}, { passive: true });
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+/* ---------- Toast ---------- */
+let toastT = 0;
+function toast(msg, ms = 2600) {
+  const t = $('toastIn'); t.textContent = msg; clearTimeout(toastT);
+  A(t, { opacity: 0, transform: 'translateY(-12px) scale(.97)' }, { opacity: 1, transform: 'none' }, { sp: 'soft' });
+  toastT = setTimeout(() => A(t, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }, { dur: 300 }), ms);
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-toast]'); if (b) { toast(b.dataset.toast); buzz(8); } });
+
+/* ======================================================================
+   SIGNATUR-KULA (fra demovideoene, engine.js) – nå i sanntid
+   ====================================================================== */
+const BZ = (() => { const x1 = .16, y1 = 1, x2 = .3, y2 = 1;
+  const bx = t => 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t;
+  const by = t => 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t;
+  return x => { if (x <= 0) return 0; if (x >= 1) return 1; let lo = 0, hi = 1;
+    for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2; if (bx(m) < x) lo = m; else hi = m; } return by((lo + hi) / 2); }; })();
+const cl = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+
+const ORB = (() => {
+  const N = 170, pts = [], edges = [], R0 = rng(7), ga = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) { const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = ga * i, j = 1 + (R0() - .5) * .08;
+    pts.push([Math.cos(th) * r * j, y * j, Math.sin(th) * r * j]); }
+  const nb = pts.map(() => []);
+  for (let i = 0; i < N; i++) for (let k = i + 1; k < N; k++) {
+    const d = Math.hypot(pts[i][0] - pts[k][0], pts[i][1] - pts[k][1], pts[i][2] - pts[k][2]);
+    if (d < .36) { edges.push([i, k]); nb[i].push(k); nb[k].push(i); } }
+  const paths = [], R1 = rng(42);
+  for (let s = 0; s < 46; s++) { let cur = Math.floor(R1() * N), prev = -1; const p = [cur];
+    for (let k = 0; k < 7; k++) { const opts = nb[cur].filter(x => x !== prev); const nx = opts[Math.floor(R1() * opts.length)]; prev = cur; cur = nx; p.push(cur); }
+    paths.push({ p, ph: R1() }); }
+  const spr = document.createElement('canvas'); spr.width = spr.height = 128;
+  { const g = spr.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+    gr.addColorStop(0, 'rgba(255,248,220,1)'); gr.addColorStop(.18, 'rgba(252,211,77,.95)'); gr.addColorStop(.45, 'rgba(245,158,11,.35)'); gr.addColorStop(1, 'rgba(245,158,11,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 128, 128); }
+  const dot = document.createElement('canvas'); dot.width = dot.height = 64;
+  { const g = dot.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(230,252,255,1)'); gr.addColorStop(.25, 'rgba(34,211,238,.9)'); gr.addColorStop(1, 'rgba(34,211,238,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64); }
+  const BK = 6; // kantene tegnes i bøtter etter lysstyrke – få strøk per bilde, jevnt på iPhone
+  function draw(ctx, o) {
+    if (o.a <= 0.002) return;
+    const { cx, cy, R } = o, work = o.work || 0;
+    const ang = 2 * Math.PI * (o.t / o.T) * 3 + (o.extra || 0);
+    const tilt = .42 + .12 * Math.sin(2 * Math.PI * o.t / o.T * 2);
+    const ca = Math.cos(ang), sa = Math.sin(ang), ct = Math.cos(tilt), stt = Math.sin(tilt);
+    const pulse = 1 + work * .035 * Math.sin(2 * Math.PI * o.t / o.T * Math.round(o.T / 1.1));
+    const Rr = R * pulse;
+    const proj = pts.map(([x, y, z]) => { let X = x * ca + z * sa, Z = -x * sa + z * ca, Y = y * ct - Z * stt; Z = y * stt + Z * ct;
+      const f = 3.2 / (3.2 - Z); return [cx + X * Rr * f, cy + Y * Rr * f, Z]; });
+    ctx.save(); ctx.globalAlpha = o.a;
+    const h = ctx.createRadialGradient(cx, cy, 0, cx, cy, Rr * 1.9);
+    h.addColorStop(0, `rgba(59,130,246,${.20 + work * .12})`); h.addColorStop(.5, `rgba(34,211,238,${.07 + work * .05})`); h.addColorStop(1, 'rgba(34,211,238,0)');
+    ctx.fillStyle = h; ctx.fillRect(cx - Rr * 2, cy - Rr * 2, Rr * 4, Rr * 4);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineWidth = Math.max(1, R / 260);
+    const fr = [], bk = [];
+    for (let b = 0; b < BK; b++) { fr.push(new Path2D()); bk.push(new Path2D()); }
+    for (const [i, k] of edges) { const a = proj[i], b = proj[k], z = (a[2] + b[2]) / 2;
+      const bi = Math.max(0, Math.min(BK - 1, Math.floor((z + 1) / 2 * BK))); const P = z > 0 ? fr[bi] : bk[bi];
+      P.moveTo(a[0], a[1]); P.lineTo(b[0], b[1]); }
+    for (let b = 0; b < BK; b++) { const z = (b + .5) / BK * 2 - 1, al = (.05 + .22 * (z + 1) / 2) * (1 + work * .5);
+      ctx.strokeStyle = `rgba(34,211,238,${al})`; ctx.stroke(fr[b]);
+      ctx.strokeStyle = `rgba(59,130,246,${al})`; ctx.stroke(bk[b]); }
+    for (const p of proj) { const d = (p[2] + 1) / 2, r = (R / 300) * (4 + 7 * d);
+      ctx.globalAlpha = o.a * (.35 + .65 * d); ctx.drawImage(dot, p[0] - r * 1.6, p[1] - r * 1.6, r * 3.2, r * 3.2); }
+    const nSp = Math.round(10 + work * 36), cyc = Math.max(1, Math.round(o.T / 2.6));
+    for (let s = 0; s < Math.min(nSp, paths.length); s++) {
+      const fadeIn = s < 10 ? 1 : cl((10 + work * 36) - s), pa = paths[s];
+      const u = ((o.t / o.T) * cyc * (1 + (s % 3)) + pa.ph) % 1;
+      for (let tr = 0; tr < 5; tr++) { const uu = u - tr * .018; if (uu < 0) continue;
+        const seg = uu * (pa.p.length - 1), si = Math.floor(seg), f = seg - si;
+        const A_ = proj[pa.p[si]], B = proj[pa.p[Math.min(si + 1, pa.p.length - 1)]];
+        const x = lerp(A_[0], B[0], f), y = lerp(A_[1], B[1], f), z = lerp(A_[2], B[2], f), env = Math.sin(Math.PI * uu);
+        const r = (R / 300) * (20 - tr * 3.2) * (.6 + .4 * (z + 1) / 2);
+        ctx.globalAlpha = cl(o.a * fadeIn * env * (1 - tr * .19) * (.55 + .45 * (z + 1) / 2) * (1 + work * .3));
+        ctx.drawImage(spr, x - r, y - r, r * 2, r * 2); } }
+    ctx.restore();
+  }
+  return { draw, spr };
+})();
+
+/* Kula sin tilstand: tweenes mot ankerpunkter i skjermene */
+const cv = $('orb'), cx2 = cv.getContext('2d');
+let DPR = 1, CW = 390, CH = 844, raf = 0;
+const orb = { cx: 195, cy: 300, R: 0, a: 0, work: .2, spin: 0, spinV: 0, kickT: -9, tw: null };
+const rings = [], parts = [];
+function orbResize() {
+  DPR = Math.min(2, devicePixelRatio || 1); CW = app.offsetWidth; CH = app.offsetHeight;
+  cv.width = Math.round(CW * DPR); cv.height = Math.round(CH * DPR); cv.style.width = CW + 'px'; cv.style.height = CH + 'px';
+  if (orb.anchor && !orb.tw) { const r = rectIn(orb.anchor); orb.cx = r.x + r.w / 2; orb.cy = r.y + r.h / 2; orb.R = r.w / 2 * (orb.rf || .5); }
+  loop();
+}
+function orbTo(anchor, o = {}) {
+  orb.anchor = anchor; orb.rf = o.rf ?? .5;
+  const r = o.rect || (anchor ? rectIn(anchor) : null);
+  const to = { cx: r ? r.x + r.w / 2 : orb.cx, cy: r ? r.y + r.h / 2 : orb.cy, R: r ? r.w / 2 * orb.rf : orb.R, a: o.a ?? 1, work: o.work ?? orb.work };
+  if (o.from) Object.assign(orb, o.from);
+  orb.tw = { from: { cx: orb.cx, cy: orb.cy, R: orb.R, a: orb.a, work: orb.work }, to, t0: performance.now(), dur: rm() ? 200 : (o.dur || 700) };
+  loop();
+}
+function orbKick() {
+  orb.kickT = performance.now() / 1000; orb.spinV = rm() ? 0 : 5;
+  if (rm()) return;
+  rings.push({ t0: orb.kickT, d: .9, x: orb.cx, y: orb.cy, r: orb.R }); rings.push({ t0: orb.kickT + .12, d: 1.1, x: orb.cx, y: orb.cy, r: orb.R });
+  burst(orb.cx, orb.cy, 26, orb.R * .8, 180, 380, 0);
+}
+function burst(x, y, n, r0, v0, v1, g) {
+  const R = rng((Math.random() * 1e9) | 0);
+  for (let i = 0; i < n; i++) { const a = R() * Math.PI * 2, v = lerp(v0, v1, R());
+    parts.push({ x: x + Math.cos(a) * r0, y: y + Math.sin(a) * r0, vx: Math.cos(a) * v, vy: Math.sin(a) * v - (g ? 120 : 0), g, life: 0, max: .7 + R() * .8, s: 5 + R() * 9 }); }
+  loop();
+}
+let lastT = 0;
+function frame(now) {
+  raf = 0; const t = now / 1000, dt = Math.min(.05, lastT ? t - lastT : .016); lastT = t;
+  if (orb.tw) { const tw = orb.tw, p = BZ(cl((now - tw.t0) / tw.dur));
+    for (const k in tw.to) orb[k] = lerp(tw.from[k], tw.to[k], p);
+    if (p >= 1) orb.tw = null; }
+  cx2.setTransform(1, 0, 0, 1, 0, 0); cx2.clearRect(0, 0, cv.width, cv.height);
+  cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
+  // «slaget»: rask sammentrekning og fjærende tilbake
+  const kt = t - orb.kickT;
+  const km = kt >= 0 && kt < 1.6 ? 1 - .16 * Math.exp(-5.5 * kt) * Math.cos(15 * kt) : 1;
+  orb.spinV *= Math.pow(.18, dt); orb.spin += orb.spinV * dt;
+  const kw = kt >= 0 && kt < 2 ? .7 * Math.exp(-2.2 * kt) : 0;
+  if (orb.a > .002 && orb.R > 1)
+    ORB.draw(cx2, { t: rm() ? t * .25 : t, T: 26, cx: orb.cx, cy: orb.cy, R: orb.R * km, a: orb.a, work: rm() ? .1 : orb.work + kw, extra: orb.spin });
+  cx2.globalCompositeOperation = 'lighter';
+  for (let i = rings.length - 1; i >= 0; i--) { const r = rings[i], p = (t - r.t0) / r.d; if (p < 0) continue; if (p >= 1) { rings.splice(i, 1); continue; }
+    const e = 1 - Math.pow(1 - p, 3); cx2.globalAlpha = (1 - p) * .7; cx2.strokeStyle = '#FCD34D'; cx2.lineWidth = 2.5 * (1 - p) + .5;
+    cx2.beginPath(); cx2.arc(r.x, r.y, r.r * (1 + e * 1.1), 0, Math.PI * 2); cx2.stroke(); }
+  for (let i = parts.length - 1; i >= 0; i--) { const q = parts[i]; q.life += dt; if (q.life >= q.max) { parts.splice(i, 1); continue; }
+    q.vx *= Math.pow(.25, dt); q.vy = q.vy * Math.pow(.25, dt) + q.g * dt; q.x += q.vx * dt; q.y += q.vy * dt;
+    const f = 1 - q.life / q.max; cx2.globalAlpha = f * f; const s = q.s * (.5 + .5 * f);
+    cx2.drawImage(ORB.spr, q.x - s, q.y - s, s * 2, s * 2); }
+  cx2.globalAlpha = 1; cx2.globalCompositeOperation = 'source-over';
+  if (orb.a > .002 || orb.tw || rings.length || parts.length) loop();
+}
+function loop() { if (!raf) raf = requestAnimationFrame(frame); }
+document.addEventListener('visibilitychange', () => { lastT = 0; });
+
+/* ======================================================================
+   TALLENE – én kilde til sannhet
+   ====================================================================== */
+const TIMEPRIS = 650;
+const LINES0 = [
+  { id: 'riv',  navn: 'Riving av gammel terrasse', det: 'Inkl. bortkjøring av avfall', t: 8, mat: 1200 },
+  { id: 'fund', navn: 'Skruefundament og bjelkelag', det: '48×198 c/c 60', t: 10, mat: 8400 },
+  { id: 'bord', navn: 'Terrassebord 28×120', det: 'Royal impregnert · 25 m²', t: 12, mat: 13900 },
+  { id: 'rekk', navn: 'Rekkverk', det: '12 lm · 1,0 m høyt', t: 6, mat: 5900, guess: true },
+  { id: 'rigg', navn: 'Rigg og kjøring', det: '', t: 2, mat: 1900 },
+];
+const S = {};
+function resetState() {
+  Object.assign(S, { lines: LINES0.map(l => ({ ...l })), kunde: false, voice: false, photos: false, height: null, reviewed: false, touched: false, via: 'sms', checked: false });
+}
+const lineSum = l => l.t * TIMEPRIS + l.mat;
+function totals() { const sum = S.lines.reduce((a, l) => a + lineSum(l), 0); const mva = Math.round(sum * .25); return { sum, mva, tot: sum + mva }; }
+function setHeight(h) {
+  const r = S.lines.find(l => l.id === 'rekk');
+  if (h === '0.9') { r.mat = 5600; r.det = '12 lm · 0,9 m høyt'; }
+  else { r.mat = 5900; r.det = '12 lm · 1,0 m høyt'; }
+  S.height = h;
+}
+window.__kf = { S, totals, lineSum }; // for testing
+
+/* Teller som glir mykt mot ny verdi */
+function counter(el) {
+  let shown = 0, target = 0, from = 0, t0 = 0, id = 0;
+  const step = now => { const p = Math.min(1, (now - t0) / 700), e = 1 - Math.pow(1 - p, 4);
+    shown = from + (target - from) * e; el.textContent = nf(p >= 1 ? target : shown); id = p < 1 ? requestAnimationFrame(step) : 0; };
+  return { set(v, instant) { target = v; cancelAnimationFrame(id);
+      if (instant || rm()) { shown = v; el.textContent = nf(v); return; }
+      from = shown; t0 = performance.now(); id = requestAnimationFrame(step); }, get value() { return target; } };
+}
+const cSum = counter($('tSum')), cMva = counter($('tMva')), cTot = counter($('tTot'));
+
+/* ======================================================================
+   KNAPPEN NEDERST (delt mellom skjermene)
+   ====================================================================== */
+const cta = $('cta'), ctaBg = cta.querySelector('.bg');
+let ctaShown = false, ctaLabel = '', ctaFn = null;
+function ctaSet(label, fn, o = {}) {
+  ctaFn = fn;
+  cta.classList.toggle('off', !!o.off);
+  if (label !== ctaLabel) {
+    cta.querySelectorAll('.lab').forEach(n => { A(n, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px)' }, { dur: 220 }); setTimeout(() => n.remove(), 240); });
+    const s = document.createElement('span'); s.className = 'lab'; s.innerHTML = label; cta.appendChild(s);
+    if (ctaShown) A(s, { opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: o.delay ?? 90 });
+    ctaLabel = label;
+  }
+  if (!ctaShown) {
+    ctaShown = true; cta.style.visibility = 'visible';
+    if (o.fromRect) { // flyt fra et element på forrige skjerm
+      const to = rectIn(cta), f = o.fromRect;
+      A(ctaBg, { transform: `translate(${f.x - to.x}px,${f.y - to.y}px) scale(${f.w / to.w},${f.h / to.h})`, borderRadius: '26px' }, { transform: 'none', borderRadius: '20px' }, { sp: 'soft' });
+      cta.querySelectorAll('.lab').forEach(n => A(n, { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 200 }));
+    } else {
+      A(cta, { opacity: 0, transform: 'translateY(30px) scale(.96)' }, { opacity: 1, transform: 'none' }, { sp: 'pop', delay: o.delay ?? 0 });
+    }
+  }
+}
+function ctaHide(o = {}) {
+  if (!ctaShown) return; ctaShown = false; ctaFn = null;
+  const a = A(cta, { opacity: 1, transform: 'none' }, { opacity: 0, transform: o.down === false ? 'scale(.92)' : 'translateY(24px) scale(.97)' }, { dur: 300 });
+  const done = () => { if (!ctaShown) { cta.style.visibility = 'hidden'; cta.style.opacity = 1; cta.style.transform = 'none'; } };
+  a ? a.onfinish = done : done();
+}
+cta.addEventListener('click', () => { if (ctaFn && !cta.classList.contains('off')) { buzz(10); ctaFn(); } });
+
+/* ======================================================================
+   SKJERMBYTTE
+   ====================================================================== */
+const ORDER = ['start', 'kunde', 'voice', 'bilder', 'lager', 'q', 'review', 'sent', 'slutt'];
+const BACK = { kunde: 'start', voice: 'kunde', bilder: 'voice', q: 'bilder', review: 'q' };
+const CTX = new Set(['voice', 'bilder', 'lager', 'q', 'review']);
+let cur = null;
+const SCR = {};
+function go(id, o = {}) {
+  gen++; const g = gen;
+  const from = cur ? $('s-' + cur) : null, to = $('s-' + id);
+  const dir = o.dir ?? (cur && ORDER.indexOf(id) < ORDER.indexOf(cur) ? -1 : 1);
+  const prev = cur; cur = id;
+  if (SCR[id].prep) SCR[id].prep(prev);
+  to.classList.add('on'); to.classList.remove('out');
+  for (const a of to.getAnimations({ subtree: true })) a.cancel();
+  to.style.opacity = 1; to.style.transform = 'none';
+  // mål ankerpunkter før noe flyttes
+  const oa = to.querySelector('.orb-anchor');
+  const ctx = { g, prev, from, oa, oaRect: oa ? rectIn(oa) : null, ctaFrom: o.ctaFrom || null, photoFrom: o.photoFrom || null };
+  if (from && from !== to) {
+    from.classList.add('out');
+    const a = A(from, { opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${-28 * dir}px) scale(.985)` }, { dur: 340 });
+    const fin = () => { if (cur !== prev && from.classList.contains('out')) { for (const x of from.getAnimations()) x.cancel(); from.classList.remove('on', 'out'); from.style.opacity = 1; from.style.transform = ''; } };
+    a ? (a.onfinish = fin, setTimeout(fin, 450)) : fin();
+    A(to, { opacity: 0, transform: `translateX(${36 * dir}px)` }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 50 });
+  }
+  if (!o.noStagger) to.querySelectorAll('.st').forEach((el, i) =>
+    A(el, { opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 90 + i * 45 }));
+  // topplinje
+  $('back').classList.toggle('on', !!BACK[id]);
+  const ctxEl = $('ctx'), showCtx = CTX.has(id), was = ctxEl.dataset.on === '1';
+  if (showCtx && !was) {
+    ctxEl.dataset.on = '1';
+    if (o.ctxFrom) { const t = rectIn(ctxEl), f = o.ctxFrom;
+      A(ctxEl, { opacity: .4, transform: `translate(calc(-50% + ${f.x + f.w / 2 - (t.x + t.w / 2)}px), calc(-50% + ${f.y + f.h / 2 - (t.y + t.h / 2)}px)) scale(${Math.max(.6, f.h / t.h)})` },
+        { opacity: 1, transform: 'translate(-50%,-50%)' }, { sp: 'soft' });
+    } else A(ctxEl, { opacity: 0, transform: 'translate(-50%,-50%) translateY(-8px) scale(.94)' }, { opacity: 1, transform: 'translate(-50%,-50%)' }, { sp: 'soft', delay: 120 });
+  } else if (!showCtx && was) {
+    ctxEl.dataset.on = '0'; A(ctxEl, { opacity: 1, transform: 'translate(-50%,-50%)' }, { opacity: 0, transform: 'translate(-50%,-50%) scale(.94)' }, { dur: 260 });
+  }
+  if (!oa && orb.a > 0) orbTo(null, { a: 0, dur: 400 });
+  SCR[id].enter && SCR[id].enter(ctx);
+}
+$('back').addEventListener('click', () => { const b = BACK[cur]; if (b) { buzz(6); go(b, { dir: -1 }); } });
+
+/* ---------- 1 Start ---------- */
+SCR.start = {
+  prep() { $('nyBtn').style.opacity = 1; },
+  enter() { ctaHide(); }
+};
+$('nyBtn').addEventListener('click', () => {
+  buzz(12); const r = rectIn($('nyBtn'));
+  $('nyBtn').style.opacity = 0;
+  go('kunde', { ctaFrom: r });
+});
+
+/* ---------- 2 Kunde ---------- */
+(() => { const g = $('blocks'); let h = '';
+  for (let i = 0; i < 46; i++) { const x = (i * 83) % 340, y = (i * 47) % 150 + 4, w = 18 + (i * 7) % 22, hh = 14 + (i * 11) % 16;
+    if (Math.abs(x + w / 2 - 175) < 30 && Math.abs(y + hh / 2 - 74) < 22) continue; h += `<rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="3"/>`; }
+  g.innerHTML = h; })();
+async function typeInto(el, text, ms, g) {
+  for (let i = 1; i <= text.length; i++) { el.textContent = text.slice(0, i); if (!(await W(ms, g))) return false; } return true; }
+function kundeFilled(anim) {
+  $('kName').textContent = 'Kari Hansen'; $('kCaret').style.display = 'none';
+  const adr = $('kAdr'); adr.textContent = 'Bjørkeveien 12, Stavanger'; adr.classList.remove('ph');
+  ['pin', 'kTag', 'pinshadow'].forEach(id => { $(id).style.opacity = 1; $(id).style.transform = 'none'; });
+  S.kunde = true; cta.classList.remove('wait'); ctaSet('Neste', toVoice);
+}
+function toVoice() { const r = rectIn($('kName')); go('voice', { ctxFrom: r }); }
+SCR.kunde = {
+  prep() {
+    if (S.kunde) return;
+    $('kName').textContent = ''; $('kCaret').style.display = ''; $('kAdr').textContent = 'Henter fra kartet …'; $('kAdr').classList.add('ph');
+    ['pin', 'kTag', 'pinshadow', 'pinring'].forEach(id => { $(id).style.opacity = 0; });
+  },
+  async enter({ g, ctaFrom }) {
+    // knappen kan trykkes med en gang: da fylles resten ut og vi går videre
+    ctaSet('Neste', S.kunde ? toVoice : () => { kundeFilled(); toVoice(); }, { fromRect: ctaFrom });
+    cta.classList.toggle('wait', !S.kunde);
+    if (S.kunde) { kundeFilled(); return; }
+    if (!(await W(450, g))) return;
+    if (!(await typeInto($('kName'), 'Kari Hansen', 55, g))) return;
+    $('kCaret').style.display = 'none';
+    if (!(await W(250, g))) return;
+    // kartnålen faller ned
+    A($('pin'), { opacity: 0, transform: 'translateY(-90px) scale(.9)' }, { opacity: 1, transform: 'none' }, { sp: 'wob' });
+    A($('pinshadow'), { opacity: 0, transform: 'scale(.3)' }, { opacity: 1, transform: 'none' }, { dur: 500 });
+    if (!(await W(330, g))) return;
+    buzz(8);
+    A($('pinring'), { opacity: .9, transform: 'scale(.3)' }, { opacity: 0, transform: 'scale(1.9)' }, { dur: 900 });
+    const adr = $('kAdr'); adr.classList.remove('ph'); adr.textContent = '';
+    if (!(await typeInto(adr, 'Bjørkeveien 12, Stavanger', 26, g))) return;
+    A($('kTag'), { opacity: 0, transform: 'scale(.7)' }, { opacity: 1, transform: 'none' }, { sp: 'pop' });
+    S.kunde = true;
+    cta.classList.remove('wait');
+    ctaSet('Neste', toVoice);
+    A(cta, { transform: 'scale(1.04)' }, { transform: 'none' }, { sp: 'pop' });
+  }
+};
+// den store knappen på start flyter ned og blir «Neste»
+
+/* ---------- 3 Snakk inn jobben ---------- */
+const SPEECH = 'Ny terrasse fem ganger fem, seksti centimeter over bakken, skruefundament, bjelkelag 48 ganger 198 c/c 60, royal impregnert terrassebord, rekkverk rundt tolv meter.'.split(' ');
+const UNDERSTOOD = [['Terrasse 5 × 5 m', 1], ['0,6 m over bakken', 0], ['Skruefundament', 0], ['48×198 c/c 60', 1], ['Royal impregnert', 0], ['Rekkverk ca. 12 lm', 1]];
+const V = { idx: 0, holding: false, timer: 0, level: 0, waveRaf: 0, done: false };
+(() => { const w = $('wave'); for (let i = 0; i < 30; i++) w.appendChild(document.createElement('i')); })();
+const bars = [...$('wave').children];
+function waveLoop(now) {
+  V.waveRaf = 0; const t = now / 1000;
+  V.level += ((V.holding ? 1 : 0) - V.level) * (V.holding ? .18 : .08);
+  bars.forEach((b, i) => { const n = .5 + .5 * Math.sin(t * 9.3 + i * .9) * Math.sin(t * 3.7 + i * 1.7) + .25 * Math.sin(t * 17 + i * 2.3);
+    const env = Math.sin(Math.PI * (i + .5) / bars.length) * .8 + .2;
+    b.style.transform = `scaleY(${(.08 + V.level * cl(n) * env * .92).toFixed(3)})`; });
+  if (V.level > .005 || V.holding) V.waveRaf = requestAnimationFrame(waveLoop);
+}
+function micHint(text) {
+  const h = $('micHint'), last = h.lastElementChild;
+  if (last && last.textContent === text) return;
+  [...h.children].forEach(old => { const a = A(old, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }, { dur: 200 }); setTimeout(() => old.remove(), 230); });
+  const s = document.createElement('span'); s.textContent = text; h.appendChild(s);
+  A(s, { opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft' });
+}
+function addWord() {
+  const ws = $('words');
+  if (V.idx === 0) { const ph = $('tph'); if (ph) ph.remove(); }
+  const s = document.createElement('span'); s.className = 'w'; s.textContent = SPEECH[V.idx]; ws.appendChild(s); ws.appendChild(document.createTextNode(' '));
+  A(s, { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }, { dur: 380 });
+  V.idx++;
+}
+function tick() {
+  if (cur !== 'voice') return;
+  if (V.idx < SPEECH.length) { addWord(); V.timer = setTimeout(tick, V.holding ? 165 : 70); }
+  else voiceDone(true);
+}
+function voiceDone(anim) {
+  clearTimeout(V.timer); V.done = true; S.voice = true; V.holding = false;
+  while (V.idx < SPEECH.length) addWord();
+  $('mic').classList.remove('hold');
+  micHint('Hold inne for å legge til mer');
+  const u = $('understood');
+  if (!u.children.length) {
+    UNDERSTOOD.forEach(([t, k], i) => { const s = document.createElement('span'); s.textContent = t; if (k) s.className = 'k'; u.appendChild(s);
+      if (anim) A(s, { opacity: 0, transform: 'scale(.8) translateY(6px)' }, { opacity: 1, transform: 'none' }, { sp: 'pop', delay: 150 + i * 70 }); else s.style.opacity = 1; });
+  }
+  ctaSet('Neste: bilder', () => go('bilder'), { delay: anim ? 520 : 0 });
+}
+function startHold(e) {
+  if (cur !== 'voice') return;
+  e.preventDefault();
+  try { $('mic').setPointerCapture(e.pointerId); } catch (_) {}
+  if (V.done) { toast('I demoen er jobben allerede snakket inn.'); buzz(6); return; }
+  V.holding = true; $('mic').classList.add('hold'); buzz(14);
+  micHint('Slipp når du er ferdig');
+  if (!V.waveRaf) V.waveRaf = requestAnimationFrame(waveLoop);
+  ringPulse();
+  clearTimeout(V.timer);
+  if (V.idx < SPEECH.length) V.timer = setTimeout(tick, V.idx === 0 ? 220 : 120);
+}
+function endHold() {
+  if (!V.holding) return;
+  V.holding = false; $('mic').classList.remove('hold'); buzz(8);
+  if (!V.done) { micHint('Fullfører teksten …'); clearTimeout(V.timer); V.timer = setTimeout(tick, 60); }
+}
+let ringT = 0;
+function ringPulse() {
+  clearTimeout(ringT);
+  if (!V.holding || rm()) return;
+  [$('r1'), $('r2')].forEach((r, i) => A(r, { opacity: .7, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.7)' }, { dur: 1200, delay: i * 400 }));
+  ringT = setTimeout(ringPulse, 1200);
+}
+$('mic').addEventListener('pointerdown', startHold);
+$('mic').addEventListener('pointerup', endHold);
+$('mic').addEventListener('pointercancel', endHold);
+addEventListener('pointerup', endHold); addEventListener('blur', endHold);
+SCR.voice = {
+  prep() {
+    if (S.voice) return;
+    clearTimeout(V.timer); Object.assign(V, { idx: 0, holding: false, done: false });
+    $('words').innerHTML = '<span class="ph" id="tph">Teksten kommer her mens du snakker.</span>'; $('understood').innerHTML = '';
+    $('micHint').innerHTML = '<span>Hold inne</span>';
+  },
+  async enter({ g }) {
+    if (S.voice) { voiceDone(false); return; }
+    ctaHide();
+    // liten pust i knappen som viser at den kan holdes
+    if (!(await W(900, g))) return;
+    if (!V.holding && V.idx === 0 && !rm()) [$('r1')].forEach(r => A(r, { opacity: .6, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.5)' }, { dur: 1100 }));
+    if (!(await W(1600, g))) return;
+    if (!V.holding && V.idx === 0 && !rm()) A($('r2'), { opacity: .6, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.5)' }, { dur: 1100 });
+  }
+};
+
+/* ---------- 4 Bilder ---------- */
+// målestrek langs forkanten av terrassen (i bildets 900×900-koordinater)
+const M0 = [30, 528], M1 = [505, 678];
+(() => {
+  const g = $('mline'), dx = M1[0] - M0[0], dy = M1[1] - M0[1], L = Math.hypot(dx, dy), nx = -dy / L * 22, ny = dx / L * 22;
+  g.innerHTML = `<path id="mpath" pathLength="1" d="M${M0} L${M1}" style="stroke-dasharray:1;stroke-dashoffset:1"/>
+    <path id="mt0" d="M${M0[0] - nx},${M0[1] - ny} L${M0[0] + nx},${M0[1] + ny}" style="opacity:0"/>
+    <path id="mt1" d="M${M1[0] - nx},${M1[1] - ny} L${M1[0] + nx},${M1[1] + ny}" style="opacity:0"/>`;
+})();
+function placeMlab() {
+  const p = $('p1'), w = p.clientWidth, h = p.clientHeight, sc = Math.max(w / 900, h / 900), ox = (w - 900 * sc) / 2, oy = (h - 900 * sc) / 2;
+  const mx = (M0[0] + M1[0]) / 2 * sc + ox, my = (M0[1] + M1[1]) / 2 * sc + oy, l = $('mlab');
+  l.style.left = (mx - 24) + 'px'; l.style.top = (my - 46) + 'px';
+}
+function photosDone() {
+  ['p1', 'p2', 'p3', 'addph'].forEach(id => { $(id).style.opacity = 1; $(id).style.transform = 'none'; });
+  $('mpath').style.strokeDashoffset = 0; $('mt0').style.opacity = 1; $('mt1').style.opacity = 1;
+  $('mlab').style.opacity = 1; $('mlab').style.transform = 'none'; $('mnote').style.opacity = 1;
+  S.photos = true; ctaSet('Lag tilbud', toLager);
+}
+SCR.bilder = {
+  prep() {
+    placeMlab();
+    if (S.photos) return;
+    ['p1', 'p2', 'p3', 'addph', 'mlab', 'mnote', 'mt0', 'mt1'].forEach(id => $(id).style.opacity = 0);
+    $('mpath').style.strokeDashoffset = 1;
+  },
+  async enter({ g }) {
+    if (S.photos) { photosDone(); return; }
+    ctaHide();
+    const ids = ['p1', 'p2', 'p3'];
+    for (let i = 0; i < 3; i++) {
+      if (!(await W(i ? 420 : 380, g))) return;
+      const p = $(ids[i]);
+      A(p, { opacity: 0, transform: `translateY(48px) scale(.86) rotate(${i % 2 ? 3 : -3}deg)` }, { opacity: 1, transform: 'none' }, { sp: 'wob' });
+      A(p.querySelector('.fl'), { opacity: .55 }, { opacity: 0 }, { dur: 420 });
+      buzz(6);
+    }
+    A($('addph'), { opacity: 0, transform: 'scale(.9)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 150 });
+    if (!(await W(560, g))) return;
+    $('mt0').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, fill: 'forwards' });
+    A($('mpath'), { strokeDashoffset: 1 }, { strokeDashoffset: 0 }, { dur: 700 });
+    if (!(await W(620, g))) return;
+    $('mt0').style.opacity = 1;
+    A($('mt1'), { opacity: 0 }, { opacity: 1 }, { dur: 150 });
+    A($('mlab'), { opacity: 0, transform: 'scale(.5) translateY(10px)' }, { opacity: 1, transform: 'none' }, { sp: 'pop' });
+    buzz(10);
+    A($('mnote'), { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 120 });
+    S.photos = true;
+    ctaSet('Lag tilbud', toLager, { delay: 200 });
+  }
+};
+$('addph').addEventListener('click', () => toast('I demoen er bildene allerede tatt.'));
+function toLager() {
+  const r = rectIn($('p1'));
+  go('lager', { photoFrom: r });
+}
+
+/* ---------- 5 Lag tilbud ---------- */
+SCR.lager = {
+  prep() { ['ck1', 'ck2', 'ck3'].forEach(id => { const c = $(id); c.classList.remove('done', 'busy'); c.querySelector('.f').style.cssText = ''; c.querySelector('path').style.strokeDashoffset = 1; }); },
+  async enter({ g, oa, oaRect: r, photoFrom: pr }) {
+    ctaHide();
+    const cx = r.x + r.w / 2, cy = r.y + r.h / 2;
+    // bilde 1 flyr inn i kula
+    if (pr && !rm()) {
+      const im = document.createElement('img'); im.src = 'bilder/1-terrassen.jpg';
+      im.style.cssText = `position:absolute;left:${pr.x}px;top:${pr.y}px;width:${pr.w}px;height:${pr.h}px;object-fit:cover;border-radius:18px;transform-origin:50% 50%`;
+      $('fx').appendChild(im);
+      const s = 70 / pr.w;
+      const a = im.animate([{ transform: 'none', opacity: 1, borderRadius: '18px' },
+        { transform: `translate(${cx - (pr.x + pr.w / 2)}px,${cy - (pr.y + pr.h / 2)}px) scale(${s})`, opacity: .9, borderRadius: '50%', offset: .8 },
+        { transform: `translate(${cx - (pr.x + pr.w / 2)}px,${cy - (pr.y + pr.h / 2)}px) scale(${s * .4})`, opacity: 0, borderRadius: '50%' }],
+        { duration: 620, easing: EASE, fill: 'forwards' });
+      a.onfinish = () => im.remove();
+    }
+    orbTo(oa, { rect: r, from: { cx, cy, R: r.w * .2, a: 0, work: .3 }, a: 1, work: .6, dur: 520, rf: .62 });
+    if (!(await W(rm() ? 100 : 470, g))) return;
+    orbKick(); buzz([18, 30, 10]);
+    orbTo(oa, { rect: r, a: 1, work: 1, dur: 500, rf: .62 });
+    const steps = ['ck1', 'ck2', 'ck3'];
+    for (let i = 0; i < 3; i++) {
+      const c = $(steps[i]); c.classList.add('busy');
+      if (!(await W(i === 0 ? 650 : 720, g))) return;
+      c.classList.remove('busy'); c.classList.add('done');
+      A(c.querySelector('.f'), { opacity: 0, transform: 'scale(.3)' }, { opacity: 1, transform: 'scale(1)' }, { sp: 'pop' });
+      A(c.querySelector('path'), { strokeDashoffset: 1 }, { strokeDashoffset: 0 }, { dur: 380, delay: 90 });
+      buzz(8);
+    }
+    if (!(await W(560, g))) return;
+    go('q');
+  }
+};
+
+/* ---------- 6 Ett spørsmål ---------- */
+const optBtns = [...document.querySelectorAll('.opt')];
+SCR.q = {
+  prep() { optBtns.forEach(b => { b.classList.remove('sel'); const f = b.querySelector('.fill'); f.style.opacity = 0; f.style.transform = 'scaleX(.2)'; }); this.lock = false; },
+  enter({ prev, oa, oaRect }) {
+    ctaHide();
+    orbTo(oa, { rect: oaRect, a: 1, work: .45, dur: prev === 'lager' ? 760 : 500, rf: .62, ...(prev === 'lager' ? {} : { from: { a: 0, R: 0, cx: oaRect.x + oaRect.w / 2, cy: oaRect.y + oaRect.h / 2 } }) });
+  }
+};
+optBtns.forEach(b => b.addEventListener('click', async e => {
+  if (SCR.q.lock) return; SCR.q.lock = true;
+  const g = gen, h = b.dataset.h, f = b.querySelector('.fill'), br = b.getBoundingClientRect();
+  b.style.setProperty('--ox', ((e.clientX || br.left + br.width / 2) - br.left) / br.width * 100 + '%');
+  b.classList.add('sel'); buzz(12);
+  A(f, { opacity: .3, transform: 'scaleX(.15)' }, { opacity: 1, transform: 'scaleX(1)' }, { dur: 420 });
+  setHeight(h === 'annet' ? '1.0' : h);
+  if (h === 'annet') toast('Du kan skrive inn høyden i tilbudet. Vi bruker 1,0 m inntil videre.', 3200);
+  S.reviewed = false;
+  if (!(await W(h === 'annet' ? 900 : 420, g))) return;
+  orbTo(null, { a: 0, dur: 380 });
+  go('review');
+}));
+
+/* ---------- 7 Gjennomgang ---------- */
+const IC = {
+  minus: '<svg viewBox="0 0 24 24" fill="none" stroke="#F1F5F9" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="#F1F5F9" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="2.6" stroke-linecap="round"><path d="M12 7v6M12 17v.5"/></svg>',
+  ok: '<svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+};
+const lineCounters = {};
+function renderLines() {
+  const box = $('lines'); box.innerHTML = '';
+  S.lines.forEach((l, i) => {
+    const d = document.createElement('div'); d.className = 'ln' + (l.guess ? ' guess' : ''); d.dataset.i = i;
+    d.innerHTML = `<div class="flash"></div><div class="ln-top"><div class="ln-name">${l.navn}</div><div class="ln-sum tn"><span class="v"></span> kr</div></div>
+      ${l.det ? `<div class="ln-det">${l.det}</div>` : ''}
+      ${l.guess ? `<button class="gtag press${S.checked ? ' ok' : ''}">${S.checked ? IC.ok + 'Sjekket' : IC.warn + 'Systemet har gjettet. Sjekk.'}</button>` : ''}
+      <div class="ln-ctl"><button class="stp press" data-d="-1" aria-label="Færre timer">${IC.minus}</button>
+        <div class="hrs tn"><b>${l.t}</b><small>t</small></div>
+        <button class="stp press" data-d="1" aria-label="Flere timer">${IC.plus}</button>
+        <div class="ln-math tn">${l.t} t × 650<br><b>+ mat. ${nf(l.mat)}</b></div></div>`;
+    box.appendChild(d);
+    lineCounters[i] = counter(d.querySelector('.v')); lineCounters[i].set(lineSum(l), true);
+    d.querySelector('[data-d="-1"]').disabled = l.t <= 0;
+  });
+}
+function updateTotals(instant) { const t = totals(); cSum.set(t.sum, instant); cMva.set(t.mva, instant); cTot.set(t.tot, instant); }
+$('lines').addEventListener('click', e => {
+  const gt = e.target.closest('.gtag');
+  if (gt) { S.checked = !S.checked; buzz(8);
+    gt.classList.toggle('ok', S.checked); gt.innerHTML = S.checked ? IC.ok + 'Sjekket' : IC.warn + 'Systemet har gjettet. Sjekk.';
+    A(gt, { transform: 'scale(.92)' }, { transform: 'none' }, { sp: 'pop' });
+    if (S.checked) toast('12 lm og 1,0 m høyde er sjekket. Du kan alltid endre timene.'); return; }
+  const b = e.target.closest('.stp'); if (!b) return;
+  const ln = b.closest('.ln'), i = +ln.dataset.i, l = S.lines[i], d = +b.dataset.d;
+  const nt = Math.max(0, l.t + d); if (nt === l.t) return;
+  l.t = nt; buzz(d > 0 ? 9 : 6);
+  if (!S.touched) { S.touched = true; const h = $('hint'); A(h, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }, { dur: 260 }); }
+  // timer: gammelt tall glir ut, nytt glir inn
+  const hb = ln.querySelector('.hrs b'), nb = hb.cloneNode(); nb.textContent = nt;
+  hb.replaceWith(nb); A(nb, { opacity: 0, transform: `translateY(${d > 0 ? 14 : -14}px)` }, { opacity: 1, transform: 'none' }, { sp: 'snap' });
+  ln.querySelector('.ln-math').innerHTML = `${l.t} t × 650<br><b>+ mat. ${nf(l.mat)}</b>`;
+  ln.querySelector('[data-d="-1"]').disabled = l.t <= 0;
+  lineCounters[i].set(lineSum(l));
+  A(ln.querySelector('.flash'), { opacity: 1 }, { opacity: 0 }, { dur: 700 });
+  updateTotals();
+  A($('totBig'), { transform: 'scale(1.06)' }, { transform: 'none' }, { sp: 'pop' });
+  A($('totGlow'), { opacity: 1 }, { opacity: 0 }, { dur: 900 });
+});
+SCR.review = {
+  prep() {
+    renderLines(); $('rscroll').scrollTop = 0;
+    $('hint').style.opacity = 0; $('hint').style.visibility = S.touched ? 'hidden' : '';
+  },
+  async enter({ g, prev }) {
+    ctaSet('Send tilbud', openSheet, { delay: 260 });
+    const first = !S.reviewed; S.reviewed = true;
+    if (first) {
+      // linjene bygges opp, totalen teller opp fra null
+      [...$('lines').children].forEach((n, i) => A(n, { opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 260 + i * 80 }));
+      cSum.set(0, true); cMva.set(0, true); cTot.set(0, true);
+      if (!(await W(420, g))) return;
+      updateTotals();
+      if (!(await W(1400, g))) return;
+      // gli rolig ned til linjen systemet har gjettet på
+      const rl = document.querySelector('.ln.guess'), sc = $('rscroll');
+      if (rl && !S.touched) sc.scrollTo({ top: Math.max(0, rl.offsetTop - sc.clientHeight + rl.offsetHeight + 16), behavior: rm() ? 'auto' : 'smooth' });
+      if (!(await W(500, g))) return;
+      const gt = document.querySelector('.gtag');
+      if (!S.touched) A($('hint'), { opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft' });
+      if (gt && !rm()) gt.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 600, easing: EASE, delay: 200 });
+    } else { updateTotals(true); if (!S.touched) $('hint').style.opacity = 1; }
+  }
+};
+
+/* ---------- 8 Send ---------- */
+let sheetOpen = false;
+function openSheet() {
+  if (sheetOpen) return; sheetOpen = true;
+  const d = $('sheetDim'), s = $('sheet'); d.style.visibility = s.style.visibility = 'visible';
+  A(d, { opacity: 0 }, { opacity: 1 }, { dur: 320 });
+  A(s, { transform: 'translateY(100%)' }, { transform: 'none' }, { sp: 'soft' });
+  s.querySelectorAll('.so').forEach((b, i) => A(b, { opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }, { sp: 'soft', delay: 80 + i * 50 }));
+}
+function closeSheet(cb) {
+  if (!sheetOpen) return cb && cb(); sheetOpen = false;
+  const d = $('sheetDim'), s = $('sheet');
+  A(d, { opacity: 1 }, { opacity: 0 }, { dur: 280 });
+  const a = A(s, { transform: 'none' }, { transform: 'translateY(100%)' }, { dur: 320, ease: 'cubic-bezier(.4,0,.6,1)' });
+  const fin = () => { if (!sheetOpen) { d.style.visibility = s.style.visibility = 'hidden'; } };
+  a ? a.onfinish = fin : fin();
+  cb && setTimeout(cb, rm() ? 0 : 120);
+}
+$('sheetDim').addEventListener('click', () => closeSheet());
+$('sheetX').addEventListener('click', () => closeSheet());
+$('sheet').addEventListener('click', e => {
+  const b = e.target.closest('.so'); if (!b) return; buzz(12);
+  const v = b.dataset.v;
+  if (v === 'pdf') { toast('PDF-en er lagret på telefonen. Med SMS-lenke ser du når Kari åpner den.', 3400); return; }
+  S.via = v;
+  closeSheet(() => go('sent'));
+});
+
+/* ---------- 9 Sendt og etterpå ---------- */
+function notify(text, g) {
+  const n = $('notif'); $('nb').textContent = text; n.style.visibility = 'visible';
+  A(n, { opacity: 0, transform: 'translateY(-120%) scale(.96)' }, { opacity: 1, transform: 'none' }, { sp: 'soft' });
+  buzz([12, 40, 12]);
+  setTimeout(() => { if (g !== gen) return; A(n, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-110%)' }, { dur: 360 }); }, 2100);
+}
+function setChip(cls, text) {
+  const w = $('tchipWrap'), c = document.createElement('span');
+  [...w.children].forEach(old => { A(old, { opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px) scale(.9)' }, { dur: 220 }); setTimeout(() => old.remove(), 250); });
+  c.className = 'chip ' + cls; c.textContent = text; w.appendChild(c);
+  A(c, { opacity: 0, transform: 'translateY(10px) scale(.85)' }, { opacity: 1, transform: 'none' }, { sp: 'pop' });
+}
+function stepOn(n) {
+  const s = $('st' + n); s.classList.add('on');
+  A(s.querySelector('em'), { transform: 'scale(0)' }, { transform: 'scale(1)' }, { sp: 'pop' });
+  A($('b' + (n - 1)), { transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }, { dur: 600 });
+}
+SCR.sent = {
+  prep() {
+    $('sentSub').textContent = S.via === 'sms' ? 'SMS-lenke til 912 34 567' : 'På e-post, med tilbudet som PDF';
+    $('trTot').textContent = $('bubTot').textContent = nf(totals().tot);
+    $('msgL').textContent = S.via === 'sms' ? 'Det Kari fikk på SMS' : 'Det Kari fikk på e-post';
+    $('tchipWrap').innerHTML = '<span class="chip c-sendt" id="tchip">Sendt</span>';
+    ['st2', 'st3'].forEach(id => { $(id).classList.remove('on'); $(id).querySelector('em').style.transform = 'scale(0)'; });
+    ['b1', 'b2'].forEach(id => $(id).style.transform = 'scaleX(0)');
+    $('notif').style.visibility = 'hidden';
+  },
+  async enter({ g }) {
+    ctaHide();
+    const ck = $('bigck');
+    A(ck.querySelector('.f'), { transform: 'scale(.2)', opacity: 0 }, { transform: 'none', opacity: 1 }, { sp: 'wob', delay: 100 });
+    A(ck.querySelector('path'), { strokeDashoffset: 1 }, { strokeDashoffset: 0 }, { dur: 460, delay: 360 });
+    buzz(16);
+    if (!(await W(1700, g))) return;
+    notify('Kari har åpnet tilbudet', g); setChip('c-apnet', 'Åpnet'); stepOn(2);
+    if (!(await W(2700, g))) return;
+    notify('Kari har godtatt ✓', g); setChip('c-godtatt', 'Godtatt ✓'); stepOn(3);
+    // liten feiring: gnister fra haken
+    const r = rectIn(ck);
+    if (!rm()) { burst(r.x + r.w / 2, r.y + r.h / 2, 46, r.w * .45, 160, 520, 380);
+      rings.push({ t0: performance.now() / 1000, d: 1, x: r.x + r.w / 2, y: r.y + r.h / 2, r: r.w / 2 }); loop();
+      ck.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 700, easing: SP.pop.ease }); }
+    if (!(await W(1500, g))) return;
+    ctaSet('Ferdig', () => go('slutt'));
+  }
+};
+
+/* ---------- 10 Slutt ---------- */
+const SMS_BODY = 'Hei Lucas, jeg vil prøve Kveldsfri-appen. Firma: ';
+$('tryBtn').href = 'sms:+4746320132?&body=' + encodeURIComponent(SMS_BODY); // virker på både iPhone og Android
+$('tryBtn').addEventListener('click', () => buzz(12));
+$('againBtn').addEventListener('click', () => { buzz(10); restart(); });
+SCR.slutt = {
+  enter({ oa, oaRect: r }) {
+    ctaHide();
+    orbTo(oa, { rect: r, from: { cx: r.x + r.w / 2, cy: r.y + r.h / 2, R: r.w * .15, a: 0, work: .8 }, a: 1, work: .35, dur: 900, rf: .62 });
+  }
+};
+function restart() {
+  resetState();
+  ['kunde', 'voice', 'bilder'].forEach(k => SCR[k].prep && SCR[k].prep());
+  orbTo(null, { a: 0, dur: 350 });
+  go('start', { dir: -1 });
+}
+
+/* ---------- Oppstart ---------- */
+resetState();
+window.__kf.go = go; window.__kf.setHeight = setHeight;
+fit();
+addEventListener('resize', () => { fit(); if (cur === 'bilder') placeMlab(); });
+DESK.addEventListener && DESK.addEventListener('change', fit);
+// klokke i rammen på PC
+const now = new Date(); $('clock').textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+go('start');
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (cur === 'bilder') placeMlab(); });
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+})();
+</script>
+</body>
+</html>
