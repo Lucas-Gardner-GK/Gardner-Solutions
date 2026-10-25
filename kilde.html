@@ -426,6 +426,7 @@
   @keyframes kvA52 { 0%,52% { opacity:0; transform:translateY(8px); } 56% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
   @keyframes kvA58 { 0%,58% { opacity:0; transform:translateY(8px); } 62% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
   @keyframes kvA64 { 0%,64% { opacity:0; transform:translateY(8px); } 68% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvPulse { 0%,100% { box-shadow:0 0 0 0 rgba(34,211,238,0.55), 0 12px 30px -10px rgba(34,211,238,0.6); } 50% { box-shadow:0 0 0 10px rgba(34,211,238,0), 0 12px 30px -10px rgba(34,211,238,0.6); } }
   @keyframes kvWave { from { transform:scaleY(0.25); } to { transform:scaleY(1); } }
   @media (prefers-reduced-motion:reduce) { [data-kv] { animation:none!important; opacity:1!important; } }
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:0.001ms!important; } }
@@ -460,6 +461,7 @@
         <a href="#demo" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Se demo</a>
         <a href="#prosess" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Slik fungerer det</a>
         <a href="#kommer" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Det som kommer</a>
+        <a href="https://gardnersolutions.no/kveldsfri/app/" style="font-size:14px; font-weight:700; color:#22D3EE; border:1px solid rgba(34,211,238,0.5); padding:9px 16px; border-radius:10px; text-decoration:none;">Prøv appen</a>
         <a href="#kontakt" style="font-size:14px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:10px 20px; border-radius:10px; text-decoration:none;">Send befaring</a>
       </div>
       <button data-hamburger="" onclick="{{ toggleMobileMenu }}" style="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #2B4469; border-radius:10px; background:transparent; cursor:pointer;" style-hover="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #22D3EE; border-radius:10px; background:rgba(34,211,238,0.06); cursor:pointer;">
@@ -476,6 +478,7 @@
       <a href="#demo" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Se demo</a>
       <a href="#prosess" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Slik fungerer det</a>
       <a href="#kommer" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Det som kommer</a>
+      <a href="https://gardnersolutions.no/kveldsfri/app/" style="font-size:15px; font-weight:700; color:#22D3EE; border:1px solid rgba(34,211,238,0.5); padding:12px 20px; border-radius:10px; text-decoration:none; text-align:center; margin-top:8px;">Prøv appen · 1 min</a>
       <a href="#kontakt" onclick="{{ closeMobileMenu }}" style="font-size:15px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:13px 20px; border-radius:10px; text-decoration:none; text-align:center; margin-top:8px;">Send meg neste befaring</a>
     </div>
   </sc-if>
@@ -536,7 +539,7 @@
         <p style="font-size:clamp(16px,2vw,19px); line-height:1.65; color:#94A3B8; max-width:540px; margin-bottom:36px; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.16s both;">Send notatene og bildene fra befaringen. Du får et ferdig tilbud med ditt firmanavn, din timepris og ditt påslag samme kveld. Du sjekker det og sender det selv.</p>
         <div style="display:flex; gap:14px; flex-wrap:wrap; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.24s both;">
           <a href="#kontakt" style="font-size:15px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:15px 28px; border-radius:12px; text-decoration:none; box-shadow:0 14px 34px -10px rgba(245,158,11,0.45);">Send meg neste befaring</a>
-          <a href="#demo" style="font-size:15px; font-weight:700; color:#E2E8F0; border:1px solid #2B4469; padding:15px 26px; border-radius:12px; text-decoration:none;">Se demoene (20 sek) →</a>
+          <a href="https://gardnersolutions.no/kveldsfri/app/" style="font-size:15px; font-weight:800; color:#22D3EE; border:1.5px solid rgba(34,211,238,0.6); background:rgba(34,211,238,0.08); padding:15px 26px; border-radius:12px; text-decoration:none;">Prøv appen selv · 1 min →</a>
         </div>
         <div style="display:flex; align-items:center; gap:10px; margin-top:40px; color:#7C8DA8; font-size:13px; font-weight:600; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.32s both;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -591,6 +594,9 @@
             </div>
           </div>
         </div>
+        <a href="https://gardnersolutions.no/kveldsfri/app/" aria-label="Prøv Kveldsfri-appen" style="position:absolute; inset:0 0 34px 0; z-index:5; border-radius:22px; cursor:pointer;"></a>
+        <a href="https://gardnersolutions.no/kveldsfri/app/" style="position:absolute; left:50%; bottom:20px; transform:translateX(-50%); z-index:6; display:inline-flex; align-items:center; gap:8px; white-space:nowrap; font-size:14px; font-weight:800; color:#0B1628; background:#22D3EE; padding:11px 18px; border-radius:999px; text-decoration:none; animation:kvPulse 2.2s ease-in-out infinite;"><span style="font-size:11px;">▶</span> Trykk og prøv selv</a>
+        <div style="height:24px;"></div>
         <div style="text-align:center; font-size:11.5px; color:#7C8DA8; margin-top:14px;">Kveldsfri-appen kommer før nyttår. I dag lager jeg tilbudet for deg, samme kveld.</div>
       </div>
     </div>
@@ -693,6 +699,15 @@
           <div style="border-radius:24px; padding:2px; background:linear-gradient(135deg,rgba(96,165,250,0.45),rgba(251,191,36,0.4),rgba(34,211,238,0.2));">
             <video src="kveldsfri/appen.mp4" poster="kveldsfri/appen-poster.jpg" controls="controls" playsinline="" preload="metadata" style="width:100%; display:block; border-radius:22px; background:#000;"></video>
           </div>
+        </div>
+      </div>
+      <div style="margin:44px auto 0; max-width:620px; border-radius:20px; padding:1px; background:linear-gradient(120deg,rgba(34,211,238,0.55),rgba(96,165,250,0.35),rgba(251,191,36,0.45));">
+        <div style="border-radius:19px; background:#12223B; padding:26px 26px 24px; text-align:center;">
+          <div style="font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE; margin-bottom:10px;">Prøv selv · 1 minutt</div>
+          <div style="font-size:clamp(20px,3vw,26px); font-weight:800; letter-spacing:-0.025em; line-height:1.2; margin-bottom:10px;">Vil du kjenne hvordan appen blir?</div>
+          <div style="font-size:14.5px; color:#94A3B8; line-height:1.6; max-width:440px; margin:0 auto 20px;">Snakk inn en jobb, ta bilder og lag et ekte tilbud. Trykk pluss og minus på timene, og se prisen endre seg med en gang.</div>
+          <a href="https://gardnersolutions.no/kveldsfri/app/" style="display:inline-flex; align-items:center; gap:10px; font-size:15px; font-weight:800; color:#0B1628; background:#22D3EE; padding:14px 26px; border-radius:12px; text-decoration:none; box-shadow:0 14px 34px -12px rgba(34,211,238,0.6);">Prøv appen her →</a>
+          <div style="font-size:12px; color:#7C8DA8; margin-top:12px;">Fungerer best på mobil.</div>
         </div>
       </div>
     </div>
@@ -984,7 +999,10 @@
   </section>
 
 
-  <a data-sticky-cta="" href="sms:+4746320132" style="display:none; position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom, 0px)); z-index:60; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:14px; font-size:16px; font-weight:800; text-decoration:none; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); box-shadow:0 18px 40px -12px rgba(0,0,0,0.7);">Send meg neste befaring <span style="font-weight:600; opacity:0.75;">· gratis</span></a>
+  <div data-sticky-cta="" style="display:none; position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom, 0px)); z-index:60; gap:10px;">
+    <a href="https://gardnersolutions.no/kveldsfri/app/" style="flex:1; display:flex; align-items:center; justify-content:center; padding:16px 10px; border-radius:14px; font-size:15px; font-weight:800; text-decoration:none; color:#0B1628; background:#22D3EE; box-shadow:0 18px 40px -12px rgba(0,0,0,0.7);">Prøv appen</a>
+    <a href="sms:+4746320132" style="flex:1; display:flex; align-items:center; justify-content:center; padding:16px 10px; border-radius:14px; font-size:15px; font-weight:800; text-decoration:none; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); box-shadow:0 18px 40px -12px rgba(0,0,0,0.7);">Send befaring</a>
+  </div>
   <!-- ===================== FOOTER ===================== -->
   <footer data-footer="" style="border-top:1px solid #1C2C45; padding:48px 32px;">
     <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
