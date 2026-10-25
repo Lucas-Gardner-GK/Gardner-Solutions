@@ -393,7 +393,7 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: #05070F; overflow-x: hidden; }
+  body { background: #0B1628; overflow-x: hidden; }
   @keyframes gspin { to { transform: rotate(360deg); } }
   @keyframes gFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
   @keyframes gReveal { from { opacity:0; transform:translateY(34px); } to { opacity:1; transform:none; } }
@@ -412,6 +412,22 @@
   @keyframes gArcPulse { 0%,100% { transform:scale(1); opacity:0.6; } 50% { transform:scale(1.15); opacity:1; } }
   @keyframes gCornerBlink { 0%,90%,100% { opacity:0.5; } 95% { opacity:1; } }
   @keyframes gHexFade { 0%,100% { opacity:0.03; } 50% { opacity:0.08; } }
+  @keyframes kvA2 { 0%,2% { opacity:0; transform:translateY(8px); } 6% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA6 { 0%,6% { opacity:0; transform:translateY(8px); } 10% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA8 { 0%,8% { opacity:0; transform:translateY(8px); } 12% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA10 { 0%,10% { opacity:0; transform:translateY(8px); } 14% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA14 { 0%,14% { opacity:0; transform:translateY(8px); } 18% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA20 { 0%,20% { opacity:0; transform:translateY(8px); } 24% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA26 { 0%,26% { opacity:0; transform:translateY(8px); } 30% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA32 { 0%,32% { opacity:0; transform:translateY(8px); } 36% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA37 { 0%,37% { opacity:0; transform:translateY(8px); } 41% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA42 { 0%,42% { opacity:0; transform:translateY(8px); } 46% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA47 { 0%,47% { opacity:0; transform:translateY(8px); } 51% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA52 { 0%,52% { opacity:0; transform:translateY(8px); } 56% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA58 { 0%,58% { opacity:0; transform:translateY(8px); } 62% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvA64 { 0%,64% { opacity:0; transform:translateY(8px); } 68% { opacity:1; transform:none; } 92% { opacity:1; transform:none; } 98%,100% { opacity:0; transform:none; } }
+  @keyframes kvWave { from { transform:scaleY(0.25); } to { transform:scaleY(1); } }
+  @media (prefers-reduced-motion:reduce) { [data-kv] { animation:none!important; opacity:1!important; } }
   @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:0.001ms!important; } }
   @media (max-width:768px) {
     [data-ticker] { animation-duration:90s!important; }
@@ -422,29 +438,31 @@
     [data-hero] { min-height:auto!important; padding-top:48px!important; padding-bottom:64px!important; }
     [data-hero-inner] { padding-left:20px!important; padding-right:20px!important; }
     [data-divider] { padding-left:20px!important; padding-right:20px!important; }
-    [data-footer] { padding-left:20px!important; padding-right:20px!important; }
+    [data-footer] { padding-left:20px!important; padding-right:20px!important; padding-bottom:110px!important; }
+    [data-sticky-cta] { display:flex!important; }
+    [data-hero-card] { margin-top:40px!important; max-width:380px!important; }
   }
 </style>
 </helmet>
 
-<div style="font-family:'Inter',-apple-system,sans-serif; background:#05070F; color:#F1F5F9; -webkit-font-smoothing:antialiased;">
+<div style="font-family:'Inter',-apple-system,sans-serif; background:#0B1628; color:#F1F5F9; -webkit-font-smoothing:antialiased;">
 
   <!-- ===================== NAV ===================== -->
-  <nav style="position:sticky; top:0; z-index:50; background:rgba(5,7,15,0.72); backdrop-filter:blur(14px); border-bottom:1px solid #11151f;">
+  <nav style="position:sticky; top:0; z-index:50; background:rgba(11,22,40,0.72); backdrop-filter:blur(14px); border-bottom:1px solid #1C2C45;">
     <div style="max-width:1200px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
       <a href="#top" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
         <svg viewBox="0 0 100 100" width="34" height="34"><defs><linearGradient id="navG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"></stop><stop offset="1" stop-color="#22d3ee"></stop></linearGradient></defs><circle cx="50" cy="50" r="33" fill="none" stroke="url(#navG)" stroke-width="11" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44.5" width="24" height="11" rx="5.5" fill="url(#navG)"></rect></svg>
         <span style="font-size:18px; font-weight:800; letter-spacing:-0.03em; color:#F1F5F9;">Gardner <span style="color:#22D3EE; font-weight:700;">Solutions</span></span>
       </a>
       <div data-desktop-nav="" style="display:flex; align-items:center; gap:30px; flex-wrap:wrap;">
-        <a href="#tjenester" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Tjenester</a>
-        <a href="#pakker" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Pakker</a>
-        <a href="#demo" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Live demo</a>
-        <a href="#levert" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Case study</a>
+        <a href="#problem" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Problemet</a>
+        <a href="#pris" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Pris</a>
+        <a href="#demo" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Se demo</a>
         <a href="#prosess" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Slik fungerer det</a>
-        <a href="#kontakt" style="font-size:14px; font-weight:700; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); padding:10px 20px; border-radius:10px; text-decoration:none;">Book et møte</a>
+        <a href="#kommer" style="font-size:14px; font-weight:600; color:#94A3B8; text-decoration:none;">Det som kommer</a>
+        <a href="#kontakt" style="font-size:14px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:10px 20px; border-radius:10px; text-decoration:none;">Send befaring</a>
       </div>
-      <button data-hamburger="" onclick="{{ toggleMobileMenu }}" style="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #1E2D4A; border-radius:10px; background:transparent; cursor:pointer;" style-hover="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #22D3EE; border-radius:10px; background:rgba(34,211,238,0.06); cursor:pointer;">
+      <button data-hamburger="" onclick="{{ toggleMobileMenu }}" style="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #2B4469; border-radius:10px; background:transparent; cursor:pointer;" style-hover="display:none; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #22D3EE; border-radius:10px; background:rgba(34,211,238,0.06); cursor:pointer;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
       </button>
     </div>
@@ -452,40 +470,40 @@
 
   <!-- Mobile menu -->
   <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
-    <div data-mobile-menu="" style="display:none; flex-direction:column; gap:4px; background:rgba(5,7,15,0.96); backdrop-filter:blur(16px); padding:12px 24px 20px; border-bottom:1px solid #11151f; position:sticky; top:61px; z-index:49;">
-      <a href="#tjenester" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Tjenester</a>
-      <a href="#pakker" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Pakker</a>
-      <a href="#demo" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Live demo</a>
-      <a href="#levert" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Case study</a>
+    <div data-mobile-menu="" style="display:none; flex-direction:column; gap:4px; background:rgba(11,22,40,0.96); backdrop-filter:blur(16px); padding:12px 24px 20px; border-bottom:1px solid #1C2C45; position:sticky; top:61px; z-index:49;">
+      <a href="#problem" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Problemet</a>
+      <a href="#pris" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Pris</a>
+      <a href="#demo" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Se demo</a>
       <a href="#prosess" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Slik fungerer det</a>
-      <a href="#kontakt" onclick="{{ closeMobileMenu }}" style="font-size:15px; font-weight:700; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); padding:13px 20px; border-radius:10px; text-decoration:none; text-align:center; margin-top:8px;">Book et møte</a>
+      <a href="#kommer" onclick="{{ closeMobileMenu }}" style="font-size:16px; font-weight:600; color:#94A3B8; text-decoration:none; padding:12px 8px; border-radius:8px;">Det som kommer</a>
+      <a href="#kontakt" onclick="{{ closeMobileMenu }}" style="font-size:15px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:13px 20px; border-radius:10px; text-decoration:none; text-align:center; margin-top:8px;">Send meg neste befaring</a>
     </div>
   </sc-if>
 
   <!-- ===================== HUD TICKER ===================== -->
-  <div style="background:#070A14; border-bottom:1px solid rgba(34,211,238,0.12); overflow:hidden; position:relative;">
+  <div style="background:#0D1A2E; border-bottom:1px solid rgba(34,211,238,0.12); overflow:hidden; position:relative;">
     <div data-ticker="" style="display:flex; animation:gTickerScroll 30s linear infinite; width:max-content;">
       <div style="display:flex; align-items:center; gap:40px; padding:9px 20px; white-space:nowrap; font-size:11px; font-weight:600; letter-spacing:0.08em; color:#22D3EE; font-family:'Courier New',monospace;">
-        <span style="animation:gHudFlicker 3s infinite;">⬡ AI-AUTOMATISERING</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span>◆ SKREDDERSYDD FOR DIN BEDRIFT</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span style="color:#3b82f6;">▲ FAKTURA · KUNDEDIALOG · INTEGRASJONER</span>
-        <span style="color:#1E3A5F;">│</span>
+        <span style="animation:gHudFlicker 3s infinite;">⬡ KVELDSFRI</span>
+        <span style="color:#2E4E78;">│</span>
+        <span>◆ FERDIG TILBUD SAMME KVELD</span>
+        <span style="color:#2E4E78;">│</span>
+        <span style="color:#3b82f6;">▲ FOR TØMRERE OG HÅNDVERKERE</span>
+        <span style="color:#2E4E78;">│</span>
         <span>◇ BASERT I STAVANGER</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span style="color:#3b82f6;">⬢ GARDNER SOLUTIONS</span>
+        <span style="color:#2E4E78;">│</span>
+        <span style="color:#3b82f6;">⬢ FØRSTE TILBUD GRATIS</span>
       </div>
       <div style="display:flex; align-items:center; gap:40px; padding:9px 20px; white-space:nowrap; font-size:11px; font-weight:600; letter-spacing:0.08em; color:#22D3EE; font-family:'Courier New',monospace;">
-        <span style="animation:gHudFlicker 3s infinite;">⬡ AI-AUTOMATISERING</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span>◆ SKREDDERSYDD FOR DIN BEDRIFT</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span style="color:#3b82f6;">▲ FAKTURA · KUNDEDIALOG · INTEGRASJONER</span>
-        <span style="color:#1E3A5F;">│</span>
+        <span style="animation:gHudFlicker 3s infinite;">⬡ KVELDSFRI</span>
+        <span style="color:#2E4E78;">│</span>
+        <span>◆ FERDIG TILBUD SAMME KVELD</span>
+        <span style="color:#2E4E78;">│</span>
+        <span style="color:#3b82f6;">▲ FOR TØMRERE OG HÅNDVERKERE</span>
+        <span style="color:#2E4E78;">│</span>
         <span>◇ BASERT I STAVANGER</span>
-        <span style="color:#1E3A5F;">│</span>
-        <span style="color:#3b82f6;">⬢ GARDNER SOLUTIONS</span>
+        <span style="color:#2E4E78;">│</span>
+        <span style="color:#3b82f6;">⬢ FØRSTE TILBUD GRATIS</span>
       </div>
     </div>
   </div>
@@ -493,7 +511,7 @@
   <!-- ===================== HERO ===================== -->
   <header id="top" data-hero="" style="position:relative; min-height:92vh; display:flex; align-items:center; overflow:hidden;">
     <canvas ref="{{ canvasRef }}" style="position:absolute; inset:0; width:100%; height:100%; display:block;"></canvas>
-    <div style="position:absolute; inset:0; background:linear-gradient(100deg,#05070F 0%,#05070F 30%,rgba(5,7,15,0.6) 58%,rgba(5,7,15,0.12) 100%); pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(100deg,#0B1628 0%,#0B1628 30%,rgba(11,22,40,0.6) 58%,rgba(11,22,40,0.12) 100%); pointer-events:none;"></div>
     <div style="position:absolute; top:-200px; left:-140px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle, rgba(37,99,235,0.2), transparent 68%); pointer-events:none;"></div>
     <!-- Floating ambient particles -->
     <div style="position:absolute; inset:0; pointer-events:none; overflow:hidden;">
@@ -505,25 +523,75 @@
       <div style="position:absolute; width:2px; height:2px; border-radius:50%; background:#fff; top:40%; left:18%; animation:gFloat 8s ease-in-out 1s infinite; opacity:0.5;"></div>
       <div style="position:absolute; width:3px; height:3px; border-radius:50%; background:#22D3EE; top:65%; left:25%; animation:gFloat 6s ease-in-out 2.5s infinite; opacity:0.3;"></div>
     </div>
-    <div data-hero-inner="" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:80px 32px; width:100%;">
-      <div style="max-width:660px;">
+    <div data-hero-inner="" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:80px 32px; width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:64px; align-items:center;">
+      <div style="max-width:620px;">
         <div style="display:inline-flex; align-items:center; gap:9px; background:rgba(34,211,238,0.1); border:1px solid rgba(34,211,238,0.28); border-radius:999px; padding:7px 16px; margin-bottom:28px; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) both;">
           <span style="width:7px; height:7px; border-radius:50%; background:#22D3EE; box-shadow:0 0 10px #22D3EE;"></span>
-          <span style="font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE;">AI-automatisering</span>
+          <span style="font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#22D3EE;">Kveldsfri · for tømrere</span>
         </div>
         <h1 style="font-size:clamp(44px,6.5vw,72px); font-weight:900; letter-spacing:-0.045em; line-height:1.0; margin-bottom:24px; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.08s both;">
-          <span style="color:#F1F5F9;">Slutt å gjøre</span><br>
-          <span style="background:linear-gradient(135deg,#3b82f6,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">det manuelt.</span>
+          <span style="color:#F1F5F9;">Ferdig tilbud</span><br>
+          <span style="background:linear-gradient(120deg,#60A5FA 10%,#FBBF24 95%); -webkit-background-clip:text; background-clip:text; color:transparent;">samme kveld.</span>
         </h1>
-        <p style="font-size:clamp(16px,2vw,19px); line-height:1.65; color:#94A3B8; max-width:540px; margin-bottom:36px; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.16s both;">Gardner Solutions utvikler skreddersydde AI-automasjoner — fra faktura og kundedialog til dataflyt mellom systemene dine. Du beholder kontrollen, vi fjerner rutinearbeidet.</p>
+        <p style="font-size:clamp(16px,2vw,19px); line-height:1.65; color:#94A3B8; max-width:540px; margin-bottom:36px; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.16s both;">Send notatene og bildene fra befaringen. Du får et ferdig tilbud med ditt firmanavn, din timepris og ditt påslag samme kveld. Du sjekker det og sender det selv.</p>
         <div style="display:flex; gap:14px; flex-wrap:wrap; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.24s both;">
-          <a href="#demo" style="font-size:15px; font-weight:700; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); padding:15px 28px; border-radius:12px; text-decoration:none; box-shadow:0 14px 34px -10px rgba(34,211,238,0.5);">Se en live demo</a>
-          <a href="#kontakt" style="font-size:15px; font-weight:700; color:#E2E8F0; border:1px solid #1E2D4A; padding:15px 26px; border-radius:12px; text-decoration:none;">Ta kontakt →</a>
+          <a href="#kontakt" style="font-size:15px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:15px 28px; border-radius:12px; text-decoration:none; box-shadow:0 14px 34px -10px rgba(245,158,11,0.45);">Send meg neste befaring</a>
+          <a href="#demo" style="font-size:15px; font-weight:700; color:#E2E8F0; border:1px solid #2B4469; padding:15px 26px; border-radius:12px; text-decoration:none;">Se demoene (20 sek) →</a>
         </div>
-        <div style="display:flex; align-items:center; gap:10px; margin-top:40px; color:#475569; font-size:13px; font-weight:600; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.32s both;">
+        <div style="display:flex; align-items:center; gap:10px; margin-top:40px; color:#7C8DA8; font-size:13px; font-weight:600; animation:gFadeUp 0.7s cubic-bezier(.16,1,.3,1) 0.32s both;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
-          Basert i Stavanger · bygget for norske bedrifter
+          Første tilbud er gratis · basert i Stavanger
         </div>
+      </div>
+      <div data-hero-card="" style="position:relative; justify-self:center; width:100%; max-width:420px; animation:gFadeUp 0.9s cubic-bezier(.16,1,.3,1) 0.3s both;">
+        <div aria-hidden="true" style="position:absolute; inset:-40px; background:radial-gradient(closest-side, rgba(251,191,36,0.16), rgba(59,130,246,0.10) 55%, transparent 75%); filter:blur(10px); pointer-events:none;"></div>
+        <div style="position:relative; border-radius:22px; padding:1px; background:linear-gradient(140deg,rgba(96,165,250,0.55),rgba(251,191,36,0.45) 60%,rgba(34,211,238,0.25));">
+          <div style="border-radius:21px; background:rgba(13,26,46,0.72); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); padding:20px 22px 22px; box-shadow:0 40px 90px -30px rgba(0,0,0,0.8);">
+
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div style="display:flex; align-items:center; gap:9px;">
+                <span style="width:9px; height:9px; border-radius:50%; background:#FBBF24; box-shadow:0 0 12px #FBBF24;"></span>
+                <span style="font-size:14px; font-weight:800; letter-spacing:-0.01em; color:#F1F5F9;">Kveldsfri</span>
+                <span style="font-size:11px; color:#8A9BB5;">· ny befaring</span>
+              </div>
+              <span style="font-size:10px; font-weight:800; letter-spacing:0.12em; color:#0B1628; background:#22D3EE; border-radius:999px; padding:4px 9px; animation:gGlowPulse 1.6s ease-in-out infinite;">LIVE</span>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(148,197,255,0.12); border-radius:14px; padding:12px 14px; margin-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span style="width:28px; height:28px; border-radius:50%; background:rgba(251,191,36,0.14); display:flex; align-items:center; justify-content:center; flex:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0"></path><path d="M12 17v4"></path></svg></span>
+                <div style="flex:1; height:24px; display:flex; align-items:center; gap:3px;"><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.0s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.4s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.8s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.7s ease-in-out 0.3s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.9s ease-in-out 0.7s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.2s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.6s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.1s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.7s ease-in-out 0.5s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.9s ease-in-out 0.0s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.4s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.8s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.3s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.7s ease-in-out 0.7s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.9s ease-in-out 0.2s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.6s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.1s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.5s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.7s ease-in-out 0.0s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.9s ease-in-out 0.4s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.8s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.3s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.7s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.7s ease-in-out 0.2s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.9s ease-in-out 0.6s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.6s ease-in-out 0.1s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 0.8s ease-in-out 0.5s infinite alternate;"></span><span style="flex:1; height:100%; border-radius:2px; background:linear-gradient(180deg,#FBBF24,#22D3EE); transform-origin:center; animation:kvWave 1.0s ease-in-out 0.0s infinite alternate;"></span></div>
+                <span style="font-size:11px; color:#8A9BB5; font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums;">0:24</span>
+              </div>
+              <div data-kv="" style="font-size:12.5px; line-height:1.5; color:#94A3B8; font-style:italic; animation:kvA2 9s ease-out infinite both;">«Ny terrasse fem ganger fem, skruefundament, royal impregnert, rekkverk cirka ti meter …»</div>
+              <div style="display:flex; gap:8px; margin-top:10px;">
+                <div data-kv="" style="flex:1; height:56px; border-radius:10px; background:#1A2B44 url(kveldsfri/befaring-1.jpg) center/cover no-repeat; border:1px solid rgba(255,255,255,0.10); box-shadow:inset 0 -20px 24px -16px rgba(0,0,0,0.6); animation:kvA6 9s ease-out infinite both;"></div><div data-kv="" style="flex:1; height:56px; border-radius:10px; background:#1A2B44 url(kveldsfri/befaring-2.jpg) center/cover no-repeat; border:1px solid rgba(255,255,255,0.10); box-shadow:inset 0 -20px 24px -16px rgba(0,0,0,0.6); animation:kvA8 9s ease-out infinite both;"></div><div data-kv="" style="flex:1; height:56px; border-radius:10px; background:#1A2B44 url(kveldsfri/befaring-3.jpg) center/cover no-repeat; border:1px solid rgba(255,255,255,0.10); box-shadow:inset 0 -20px 24px -16px rgba(0,0,0,0.6); animation:kvA10 9s ease-out infinite both;"></div>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:7px; margin:4px 2px 12px;">
+              <div data-kv="" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#CBD5E1; animation:kvA14 9s ease-out infinite both;"><span style="width:16px; height:16px; border-radius:50%; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.5); display:inline-flex; align-items:center; justify-content:center; color:#FBBF24; font-size:10px; font-weight:900;">✓</span>Forstår jobben</div><div data-kv="" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#CBD5E1; animation:kvA20 9s ease-out infinite both;"><span style="width:16px; height:16px; border-radius:50%; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.5); display:inline-flex; align-items:center; justify-content:center; color:#FBBF24; font-size:10px; font-weight:900;">✓</span>Regner mengder og materialer</div><div data-kv="" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#CBD5E1; animation:kvA26 9s ease-out infinite both;"><span style="width:16px; height:16px; border-radius:50%; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.5); display:inline-flex; align-items:center; justify-content:center; color:#FBBF24; font-size:10px; font-weight:900;">✓</span>Legger på din timepris og ditt påslag</div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(148,197,255,0.12); border-radius:14px; padding:10px 14px 14px;">
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:#8A9BB5; padding-bottom:4px;"><span>Tilbud nr. 1042 · Nordvik Tømrer AS</span><span>Til: Kari Hansen</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(148,197,255,0.08); font-size:13px; color:#CBD5E1; animation:kvA32 9s ease-out infinite both;"><span>Riving av gammel terrasse</span><span style="font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; color:#F1F5F9; font-weight:600;">6 400</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(148,197,255,0.08); font-size:13px; color:#CBD5E1; animation:kvA37 9s ease-out infinite both;"><span>Skruefundament og bjelkelag</span><span style="font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; color:#F1F5F9; font-weight:600;">14 900</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(148,197,255,0.08); font-size:13px; color:#CBD5E1; animation:kvA42 9s ease-out infinite both;"><span>Terrassebord 28×120, 25 m²</span><span style="font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; color:#F1F5F9; font-weight:600;">21 700</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(148,197,255,0.08); font-size:13px; color:#CBD5E1; animation:kvA47 9s ease-out infinite both;"><span>Rekkverk, 10 lm</span><span style="font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; color:#F1F5F9; font-weight:600;">9 800</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(148,197,255,0.08); font-size:13px; color:#CBD5E1; animation:kvA52 9s ease-out infinite both;"><span>Rigg og kjøring</span><span style="font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; color:#F1F5F9; font-weight:600;">3 200</span></div>
+              <div data-kv="" style="display:flex; justify-content:space-between; align-items:baseline; padding-top:12px; animation:kvA58 9s ease-out infinite both;">
+                <span style="font-size:12px; color:#8A9BB5;">Totalt inkl. mva</span>
+                <span style="font-size:28px; font-weight:900; letter-spacing:-0.02em; font-family:'SF Mono',ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; background:linear-gradient(120deg,#FDE68A,#F59E0B); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 30px rgba(251,191,36,0.25);">70 000 kr</span>
+              </div>
+              <div data-kv="" style="display:flex; gap:8px; margin-top:12px; animation:kvA64 9s ease-out infinite both;">
+                <span style="flex:1; text-align:center; font-size:12px; font-weight:800; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); border-radius:9px; padding:9px;">Send til kunden</span>
+                <span style="text-align:center; font-size:12px; font-weight:700; color:#CBD5E1; border:1px solid rgba(148,197,255,0.2); border-radius:9px; padding:9px 12px;">Juster</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; font-size:11.5px; color:#7C8DA8; margin-top:14px;">Kveldsfri-appen kommer før nyttår. I dag lager jeg tilbudet for deg, samme kveld.</div>
       </div>
     </div>
   </header>
@@ -535,181 +603,96 @@
 
 
 
-  <!-- ===================== TJENESTER ===================== -->
-  <section id="tjenester" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px; position:relative;">
-    <!-- Subtle grid bg -->
+  <!-- ===================== PROBLEMET ===================== -->
+  <section id="problem" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px; position:relative;">
     <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(34,211,238,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,0.04) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,black,transparent);"></div>
     <div style="margin-bottom:54px; animation:gReveal both; animation-timeline:view(); animation-range:entry 0% cover 24%;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Tjenester</div>
-      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:640px;">Vi automatiserer det som tar tid.</h2>
-      <p style="font-size:16px; line-height:1.65; color:#64748B; max-width:540px; margin-top:16px;">Her er noen eksempler — hver løsning skreddersys til din bedrift og dine systemer.</p>
+      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Kjenner du deg igjen?</div>
+      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:680px;">Jobben gjør du på dagen. <span style="background:linear-gradient(135deg,#3b82f6,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">Tilbudene tar kvelden.</span></h2>
     </div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:20px;">
-
-      <div style="background:#0D1017; border:1px solid #1A2030; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#0D1017; border:1px solid #1E2D4A; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
-        <!-- HUD corners -->
-        <div style="position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-left:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s infinite;"></div>
-        <div style="position:absolute; top:8px; right:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-right:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 0.5s infinite;"></div>
-        <div style="position:absolute; bottom:8px; left:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-left:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1s infinite;"></div>
-        <div style="position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-right:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1.5s infinite;"></div>
-        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path><path d="M8 8h8"></path><path d="M8 12h8"></path><path d="M8 16h5"></path></svg>
-        </div>
-        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Fakturering</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Fra ordre til bokført faktura uten manuelle steg. AI-en leser data, beregner MVA og sender til kunde.</p>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#12223B; border:1px solid #2B4469; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
+        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></div>
+        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Kvelden går med</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Befaringen er unnagjort på dagtid. Tilbudet blir liggende til du kommer hjem, og da er det middag, barn og papirarbeid.</p>
       </div>
-
-      <div style="background:#0D1017; border:1px solid #1A2030; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#0D1017; border:1px solid #1E2D4A; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
-        <div style="position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-left:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 0.3s infinite;"></div>
-        <div style="position:absolute; top:8px; right:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-right:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 0.8s infinite;"></div>
-        <div style="position:absolute; bottom:8px; left:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-left:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1.3s infinite;"></div>
-        <div style="position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-right:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1.8s infinite;"></div>
-        <div style="width:48px; height:48px; border-radius:12px; background:rgba(8,145,178,0.16); display:flex; align-items:center; justify-content:center; margin-bottom:22px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
-        </div>
-        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Kundedialog</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">AI-agenter som svarer kunder, følger opp tilbud og holder din tone — døgnet rundt.</p>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#12223B; border:1px solid #2B4469; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
+        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7Z"></path><path d="m2 17 10 5 10-5"></path><path d="m2 12 10 5 10-5"></path></svg></div>
+        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Hver jobb er ny</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Bad, terrasse, kledning, vinduer. Mål, mengder og materialer må regnes ut på nytt hver gang.</p>
       </div>
-
-      <div style="background:#0D1017; border:1px solid #1A2030; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#0D1017; border:1px solid #1E2D4A; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
-        <div style="position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-left:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 0.6s infinite;"></div>
-        <div style="position:absolute; top:8px; right:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-right:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 1.1s infinite;"></div>
-        <div style="position:absolute; bottom:8px; left:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-left:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1.6s infinite;"></div>
-        <div style="position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-right:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 2.1s infinite;"></div>
-        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-        </div>
-        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Integrasjoner</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Koble sammen CRM, regnskap og verktøyene dine. Data flyter dit det skal — automatisk.</p>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#12223B; border:1px solid #2B4469; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
+        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div>
+        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Kunden venter</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Den som sender et ryddig tilbud først, får ofte jobben. Hver dag tilbudet ligger, øker sjansen for at noen andre kommer før deg.</p>
       </div>
-
-      <div style="background:#0D1017; border:1px solid #1A2030; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#0D1017; border:1px solid #1E2D4A; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
-        <div style="position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-left:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 0.9s infinite;"></div>
-        <div style="position:absolute; top:8px; right:8px; width:16px; height:16px; border-top:2px solid #22D3EE; border-right:2px solid #22D3EE; opacity:0.4; animation:gCornerBlink 4s 1.4s infinite;"></div>
-        <div style="position:absolute; bottom:8px; left:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-left:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 1.9s infinite;"></div>
-        <div style="position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:2px solid #3b82f6; border-right:2px solid #3b82f6; opacity:0.4; animation:gCornerBlink 4s 2.4s infinite;"></div>
-        <div style="width:48px; height:48px; border-radius:12px; background:rgba(8,145,178,0.16); display:flex; align-items:center; justify-content:center; margin-bottom:22px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><circle cx="8.5" cy="16" r="1"></circle><circle cx="15.5" cy="16" r="1"></circle></svg>
-        </div>
-        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Egne AI-agenter</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Skreddersydde agenter trent på dine prosesser og ditt fagspråk — ikke en generisk chatbot.</p>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:16px; padding:30px; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; overflow:hidden;" style-hover="background:#12223B; border:1px solid #2B4469; border-radius:16px; padding:30px; transform:translateY(-4px); box-shadow:0 16px 40px -12px rgba(34,211,238,0.15);">
+        <div style="width:48px; height:48px; border-radius:12px; background:rgba(37,99,235,0.14); display:flex; align-items:center; justify-content:center; margin-bottom:22px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><path d="M8 6h8"></path><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 18h8"></path></svg></div>
+        <h3 style="font-size:19px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Timer blir glemt</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Når prisen settes i farta, er det lett å glemme rigg, kjøring eller en ekstra dag. Det merkes først når jobben er ferdig.</p>
       </div>
-
     </div>
-    <p style="font-size:14px; color:#475569; text-align:center; margin-top:32px;">…og mye mer. Vi finner ut hva som gir mest verdi for akkurat din bedrift.</p>
   </section>
 
-  <!-- ===================== PAKKER ===================== -->
-  <section id="pakker" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px;">
+  <!-- ===================== PRIS ===================== -->
+  <section id="pris" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px;">
     <div style="margin-bottom:54px; animation:gReveal both; animation-timeline:view(); animation-range:entry 0% cover 24%;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Priser og pakker</div>
-      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:680px;">Du gjør jobben. <span style="background:linear-gradient(135deg,#60A5FA,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">La AI gjøre resten.</span></h2>
-      <p style="font-size:16px; line-height:1.7; color:#94A3B8; max-width:520px; margin-top:16px;">To ferdige pakker — eller noe helt eget om du driver noe annet. Ingen binding de første 30 dagene. Du betaler kun hvis du faktisk sparer tid — ellers får du pengene tilbake.</p>
+      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Kveldsfri</div>
+      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:680px;">Du tar befaringen. <span style="background:linear-gradient(135deg,#60A5FA,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">Jeg lager tilbudet.</span></h2>
+      <p style="font-size:16px; line-height:1.7; color:#94A3B8; max-width:560px; margin-top:16px;">Tilbudet blir laget med dine priser og går ut i ditt navn. Du har siste ord før noe sendes til kunden.</p>
     </div>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px; max-width:1180px;">
-
-      <!-- STARTER -->
-      <div style="border:1px solid #1A2030; border-radius:18px; padding:36px; position:relative; overflow:hidden; display:flex; flex-direction:column; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#64748B; margin-bottom:10px;">Starter</div>
-        <div style="font-size:23px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-bottom:10px;">Aldri mist en kunde igjen.</div>
-        <div style="font-size:13.5px; font-style:italic; color:#64748B; line-height:1.5; margin-bottom:26px;">For deg som svarer for sent, glemmer å følge opp, eller taper kunder til de som svarer først.</div>
-        <div style="margin-bottom:26px;">
-          <div style="font-size:42px; font-weight:900; letter-spacing:-0.03em; line-height:1;"><span style="font-size:20px; font-weight:600; vertical-align:super;">kr</span> 990 <span style="font-size:15px; font-weight:500; color:#64748B;">/ mnd</span></div>
-          <div style="font-size:13px; color:#64748B; margin-top:8px;">Oppstart <strong style="color:#F1F5F9;">kun kr 1 990</strong> <span style="text-decoration:line-through; color:#64748B; font-size:12px; margin-left:6px;">3 500</span> <span style="color:#22D3EE; font-weight:600; font-size:12px;">spar 1 510</span></div>
-        </div>
-        <div style="height:1px; background:#1A2030; margin-bottom:24px;"></div>
-        <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:32px; flex:1;">
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Alle henvendelser samlet ett sted</strong> — e-post, skjema og meldinger fanges opp automatisk. Ingenting faller mellom stolene.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Kundene får påminnelse av seg selv</strong> — de møter opp til avtalen, uten at du løfter en finger.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Du ser hva som tapper deg for tid</strong> — enkel månedlig oversikt, i klare tall.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Live innen 48 timer</strong> — ferdig satt opp og testet. Du gjør ingenting.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">En ekte person å ringe</strong> — ikke et kontaktskjema. Meg.</span></div>
-        </div>
-        <a href="mailto:lucas@gardnersolutions.no?subject=Starter-pakken" style="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:transparent; color:#F1F5F9; border:1px solid #1E2D4A; box-sizing:border-box;" style-hover="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:rgba(34,211,238,0.06); color:#22D3EE; border:1px solid #22D3EE; box-sizing:border-box;">Kom i gang →</a>
-      </div>
-
-      <!-- VEKST -->
-      <div style="border:1px solid rgba(37,99,235,0.4); border-radius:18px; padding:36px; position:relative; overflow:hidden; display:flex; flex-direction:column; background:linear-gradient(160deg,#0D1424,#0A0E1A); animation:gBorderGlow 4s ease-in-out infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(37,99,235,0.35);">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; max-width:1180px;">
+      <div style="border:1px solid rgba(37,99,235,0.4); border-radius:18px; padding:36px; position:relative; overflow:hidden; display:flex; flex-direction:column; background:linear-gradient(160deg,#15294A,#112038); animation:gBorderGlow 4s ease-in-out infinite;">
         <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#2563EB,#22D3EE);"></div>
-        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(37,99,235,0.12); border:1px solid rgba(37,99,235,0.25); border-radius:100px; padding:5px 13px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#60A5FA; margin-bottom:18px; width:fit-content;">⚡ Mest valgt</div>
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#64748B; margin-bottom:10px;">Vekst</div>
-        <div style="font-size:23px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-bottom:10px;">Bedriften jobber — også når du ikke gjør det.</div>
-        <div style="font-size:13.5px; font-style:italic; color:#64748B; line-height:1.5; margin-bottom:26px;">For deg som vil vokse uten å ansette, og heller vil bruke tiden på faget enn på innboksen.</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(37,99,235,0.12); border:1px solid rgba(37,99,235,0.25); border-radius:100px; padding:5px 13px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#60A5FA; margin-bottom:18px; width:fit-content;">Pilot · få plasser</div>
+        <div style="font-size:23px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-bottom:10px;">Ferdig tilbud samme kveld</div>
+        <div style="font-size:13.5px; font-style:italic; color:#8A9BB5; line-height:1.5; margin-bottom:26px;">For tømrere og håndverkere som heller vil ha kvelden fri.</div>
         <div style="margin-bottom:26px;">
-          <div style="font-size:42px; font-weight:900; letter-spacing:-0.03em; line-height:1;"><span style="font-size:20px; font-weight:600; vertical-align:super;">kr</span> 1 990 <span style="font-size:15px; font-weight:500; color:#64748B;">/ mnd</span></div>
-          <div style="font-size:13px; color:#64748B; margin-top:8px;">Oppstart <strong style="color:#F1F5F9;">kun kr 4 990</strong> <span style="text-decoration:line-through; color:#64748B; font-size:12px; margin-left:6px;">8 000</span> <span style="color:#22D3EE; font-weight:600; font-size:12px;">spar 3 010</span></div>
+          <div style="font-size:42px; font-weight:900; letter-spacing:-0.03em; line-height:1;">Gratis</div>
+          <div style="font-size:13px; color:#8A9BB5; margin-top:8px;">Det første tilbudet. Etter det: fast pris per tilbud, avtalt med deg på forhånd.</div>
         </div>
-        <div style="height:1px; background:#1A2030; margin-bottom:24px;"></div>
+        <div style="height:1px; background:#22365A; margin-bottom:24px;"></div>
         <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:32px; flex:1;">
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Alt i Starter</strong> — hele tryggheten, pluss alt under.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Svarene skriver seg selv</strong> — AI leser meldingen og har svaret ferdig og klart. Du leser over og trykker send.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">En selger på nettsiden som aldri sover</strong> — chatboten svarer kunder, gir pris og booker time klokka 03:00 mens du ligger og sover.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;"><strong style="color:#E2E8F0;">Vi forbedrer systemet sammen</strong> — månedlig gjennomgang hvis du vil ha det.</span></div>
+          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14.5px; color:#94A3B8; line-height:1.55;"><strong style="color:#E2E8F0;">Mengder og materialer</strong> regnet ut fra notatene og bildene dine.</span></div>
+          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14.5px; color:#94A3B8; line-height:1.55;"><strong style="color:#E2E8F0;">Din timepris og ditt påslag</strong> ikke noen andres.</span></div>
+          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14.5px; color:#94A3B8; line-height:1.55;"><strong style="color:#E2E8F0;">Ferdig PDF med ditt firmanavn</strong> klar til å sendes på e-post eller SMS.</span></div>
+          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14.5px; color:#94A3B8; line-height:1.55;"><strong style="color:#E2E8F0;">Endringer er med</strong> trenger noe å justeres, fikser jeg det.</span></div>
+          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14.5px; color:#94A3B8; line-height:1.55;"><strong style="color:#E2E8F0;">Pilotprisen låses</strong> i 6 måneder etter at Kveldsfri-systemet lanseres.</span></div>
         </div>
-        <a href="mailto:lucas@gardnersolutions.no?subject=Vekst-pakken" style="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:linear-gradient(135deg,#2563EB,#22D3EE); color:#05070F; border:none; box-sizing:border-box;" style-hover="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:linear-gradient(135deg,#2563EB,#22D3EE); color:#05070F; border:none; opacity:0.9; box-sizing:border-box;">Kom i gang →</a>
+        <a href="#kontakt" style="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:linear-gradient(135deg,#F59E0B,#FCD34D); color:#1A1206; box-sizing:border-box;">Send meg neste befaring →</a>
       </div>
-
-      <!-- NOE ANNET -->
-      <div style="border:1px dashed #2A3550; border-radius:18px; padding:36px; position:relative; overflow:hidden; display:flex; flex-direction:column; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.18);">
-        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#22D3EE; margin-bottom:10px;">Noe annet?</div>
-        <div style="font-size:23px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-bottom:10px;">Driver du noe helt annet?</div>
-        <div style="font-size:13.5px; font-style:italic; color:#64748B; line-height:1.5; margin-bottom:26px;">Treningssenter, klinikk, byggefirma, nettbutikk — alle mister penger på hver sin måte.</div>
-        <div style="margin-bottom:26px;">
-          <div style="font-size:30px; font-weight:900; letter-spacing:-0.02em; line-height:1;">Tilpasset deg</div>
-          <div style="font-size:13px; color:#64748B; margin-top:8px;">Pris avklares i møtet — tilpasset det du trenger.</div>
-        </div>
-        <div style="height:1px; background:#1A2030; margin-bottom:24px;"></div>
-        <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:32px; flex:1;">
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;">Vi tar en prat og finner ut <strong style="color:#E2E8F0;">hvor du taper mest</strong>.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;">Jeg lager <strong style="color:#E2E8F0;">noe som fikser akkurat det</strong> — bygget for deg.</span></div>
-          <div style="display:flex; gap:11px; align-items:flex-start;"><span style="color:#22D3EE; flex-shrink:0; font-size:13px; margin-top:2px;">✓</span><span style="font-size:14px; color:#94A3B8; line-height:1.5;">Du <strong style="color:#E2E8F0;">betaler først når vi vet</strong> hva du trenger.</span></div>
-        </div>
-        <a href="mailto:lucas@gardnersolutions.no?subject=Noe annet — tilpasset løsning" style="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:transparent; color:#F1F5F9; border:1px solid #1E2D4A; box-sizing:border-box;" style-hover="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; background:rgba(34,211,238,0.06); color:#22D3EE; border:1px solid #22D3EE; box-sizing:border-box;">Book et møte →</a>
+      <div style="border:1px dashed #3A5278; border-radius:18px; padding:36px; display:flex; flex-direction:column;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#22D3EE; margin-bottom:10px;">Trenger du noe annet?</div>
+        <div style="font-size:23px; font-weight:800; letter-spacing:-0.02em; line-height:1.2; margin-bottom:10px;">Skreddersydde verktøy for håndverkere</div>
+        <div style="font-size:14.5px; color:#94A3B8; line-height:1.6; margin-bottom:26px;">Kveldsfri er hovedfokuset. Men har du en annen tidstyv, som fakturering eller kalkulasjon, kan vi ta en prat om det også.</div>
+        <div style="flex:1;"></div>
+        <a href="mailto:lucas@gardnersolutions.no?subject=Noe annet" style="display:block; width:100%; padding:14px; border-radius:10px; font-size:14px; font-weight:700; text-align:center; text-decoration:none; color:#F1F5F9; border:1px solid #2B4469; box-sizing:border-box;">Send en e-post →</a>
       </div>
-
     </div>
-
-        <p style="text-align:center; font-size:13px; color:#64748B; margin-top:32px;">Usikker på hva som passer? <a href="#kontakt" style="color:#22D3EE; text-decoration:none; font-weight:600;">Ta en gratis prat</a> — så finner vi ut av det sammen.</p>
   </section>
 
   <!-- ===================== DEMO ===================== -->
-  <section id="demo" style="position:relative; padding:110px 0; background:linear-gradient(180deg,#05070F,#070B16 50%,#05070F);">
-    <div style="max-width:720px; margin:0 auto; padding:0 32px;">
-
-      <!-- Card with glowing border -->
-      <div style="position:relative; border-radius:20px; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,0.3),rgba(34,211,238,0.3),rgba(37,99,235,0.15)); animation:gBorderGlow 4s ease-in-out infinite, gReveal both; animation-timeline:view(); animation-range:entry 0% cover 22%;">
-        <div style="background:#0A0E1A; border-radius:18px; padding:clamp(40px,6vw,60px); position:relative; overflow:hidden; text-align:center;">
-          <!-- Ambient glow -->
-          <div style="position:absolute; top:-80px; left:50%; transform:translateX(-50%); width:300px; height:300px; background:radial-gradient(circle,rgba(34,211,238,0.06) 0%,transparent 70%); pointer-events:none;"></div>
-
-          <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#22D3EE; margin-bottom:20px;">AI-assistent · Demo</div>
-
-          <h2 style="font-size:clamp(26px,4vw,38px); font-weight:800; letter-spacing:-0.035em; line-height:1.1; margin-bottom:16px;">Se hvordan AI svarer for din bedrift</h2>
-
-          <p style="font-size:15.5px; line-height:1.7; color:#94A3B8; max-width:480px; margin:0 auto 32px;">Vi bygger en skreddersydd AI-assistent som svarer på kundehenvendelser 24/7 — tilpasset dine tjenester, priser og rutiner.</p>
-
-          <!-- Checkmarks -->
-          <div style="display:flex; flex-direction:column; gap:14px; align-items:flex-start; max-width:380px; margin:0 auto 36px; text-align:left;">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <span style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#05070F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <span style="font-size:15px; font-weight:500; color:#E2E8F0;">Svarer på spørsmål om tjenester og priser</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px;">
-              <span style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#05070F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <span style="font-size:15px; font-weight:500; color:#E2E8F0;">Alltid tilgjengelig — dag og natt</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px;">
-              <span style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#05070F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
-              <span style="font-size:15px; font-weight:500; color:#E2E8F0;">Lærer om din bedrift på forhånd</span>
-            </div>
+  <section id="demo" style="position:relative; padding:110px 0; background:linear-gradient(180deg,#0B1628,#0F1D33 50%,#0B1628);">
+    <div style="max-width:960px; margin:0 auto; padding:0 32px; text-align:center;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#22D3EE; margin-bottom:20px;">Se det selv · 20 sekunder hver</div>
+      <h2 style="font-size:clamp(26px,4vw,38px); font-weight:800; letter-spacing:-0.035em; line-height:1.1; margin-bottom:16px;">Dette får du i dag. <span style="background:linear-gradient(120deg,#60A5FA 10%,#FBBF24 95%); -webkit-background-clip:text; background-clip:text; color:transparent;">Dette får du først.</span></h2>
+      <p style="font-size:15.5px; line-height:1.7; color:#94A3B8; max-width:520px; margin:0 auto 40px;">Til venstre: slik det fungerer nå, mens appen bygges. Til høyre: Kveldsfri-appen, som pilotkundene får først.</p>
+      <div style="display:flex; gap:28px; justify-content:center; flex-wrap:wrap; text-align:left;">
+        <div style="flex:1; min-width:260px; max-width:360px;">
+          <div style="display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#FBBF24; margin-bottom:10px;"><span style="width:7px; height:7px; border-radius:50%; background:#FBBF24;"></span>I dag</div>
+          <div style="font-size:19px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px;">Kveldsfri i dag</div>
+          <div style="font-size:13.5px; color:#94A3B8; line-height:1.5; margin-bottom:16px; min-height:40px;">Send notater og bilder etter befaringen. Ferdig tilbud samme kveld.</div>
+          <div style="border-radius:24px; padding:2px; background:linear-gradient(135deg,rgba(96,165,250,0.45),rgba(251,191,36,0.4),rgba(34,211,238,0.2));">
+            <video src="kveldsfri/i-dag.mp4" poster="kveldsfri/i-dag-poster.jpg" controls="controls" playsinline="" preload="metadata" style="width:100%; display:block; border-radius:22px; background:#000;"></video>
           </div>
-
-          <!-- Button -->
-          <button onclick="{{ openChat }}" style="padding:17px 36px; border:none; border-radius:13px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); display:inline-flex; align-items:center; gap:10px; box-shadow:0 14px 36px -10px rgba(34,211,238,0.5); transition:transform .2s, box-shadow .2s;" style-hover="padding:17px 36px; border:none; border-radius:13px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); display:inline-flex; align-items:center; gap:10px; box-shadow:0 18px 44px -10px rgba(34,211,238,0.6); transform:translateY(-2px);" style-active="padding:17px 36px; border:none; border-radius:13px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); display:inline-flex; align-items:center; gap:10px; transform:translateY(1px);">
-            Prøv demo
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-          </button>
+        </div>
+        <div style="flex:1; min-width:260px; max-width:360px;">
+          <div style="display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#22D3EE; margin-bottom:10px;"><span style="width:7px; height:7px; border-radius:50%; background:#22D3EE;"></span>Kommer før nyttår</div>
+          <div style="font-size:19px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px;">Kveldsfri-appen</div>
+          <div style="font-size:13.5px; color:#94A3B8; line-height:1.5; margin-bottom:16px; min-height:40px;">Snakk inn jobben, ta bilder, få tilbudet på minutter.</div>
+          <div style="border-radius:24px; padding:2px; background:linear-gradient(135deg,rgba(96,165,250,0.45),rgba(251,191,36,0.4),rgba(34,211,238,0.2));">
+            <video src="kveldsfri/appen.mp4" poster="kveldsfri/appen-poster.jpg" controls="controls" playsinline="" preload="metadata" style="width:100%; display:block; border-radius:22px; background:#000;"></video>
+          </div>
         </div>
       </div>
     </div>
@@ -718,13 +701,13 @@
   <!-- ===================== CASE STUDY ===================== -->
   <section id="levert" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px; position:relative;">
     <div style="margin-bottom:48px; animation:gReveal both; animation-timeline:view(); animation-range:entry 0% cover 24%;">
-      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Case study</div>
-      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:620px;">Hva vi har levert</h2>
+      <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Levert</div>
+      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:620px;">Bygget for håndverkere</h2>
     </div>
 
     <!-- Case card -->
     <div style="position:relative; border-radius:18px; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,0.35),rgba(34,211,238,0.35),rgba(37,99,235,0.15)); animation:gBorderGlow 4s ease-in-out infinite, gReveal both; animation-timeline:view(); animation-range:entry 0% cover 22%;">
-      <div style="background:#0A0E1A; border-radius:16px; padding:clamp(32px,5vw,56px); position:relative; overflow:hidden;">
+      <div style="background:#112038; border-radius:16px; padding:clamp(32px,5vw,56px); position:relative; overflow:hidden;">
         <!-- Subtle corner accents -->
         <div style="position:absolute; top:0; left:0; width:80px; height:80px; border-top:1px solid rgba(34,211,238,0.2); border-left:1px solid rgba(34,211,238,0.2); border-radius:16px 0 0 0;"></div>
         <div style="position:absolute; bottom:0; right:0; width:80px; height:80px; border-bottom:1px solid rgba(34,211,238,0.2); border-right:1px solid rgba(34,211,238,0.2); border-radius:0 0 16px 0;"></div>
@@ -734,11 +717,11 @@
         <!-- Badge + industry -->
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:28px;">
           <span style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#22D3EE; background:rgba(34,211,238,0.08); border:1px solid rgba(34,211,238,0.15); padding:6px 14px; border-radius:999px;">Første prosjekt · Juni 2025</span>
-          <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#64748B; background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.12); padding:6px 14px; border-radius:999px;">Håndverk &amp; Snekkerarbeid</span>
+          <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#8A9BB5; background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.12); padding:6px 14px; border-radius:999px;">Håndverk &amp; Snekkerarbeid</span>
         </div>
 
         <!-- Client name -->
-        <div style="font-size:13px; font-weight:600; color:#475569; letter-spacing:0.02em; margin-bottom:8px;">Kunde: Steven M Jones Snekker Service</div>
+        <div style="font-size:13px; font-weight:600; color:#7C8DA8; letter-spacing:0.02em; margin-bottom:8px;">Kunde: Steven M Jones Snekker Service</div>
 
         <!-- Headline -->
         <h3 style="font-size:clamp(24px,3.5vw,34px); font-weight:800; letter-spacing:-0.03em; line-height:1.12; margin-bottom:18px; max-width:600px;">Skreddersydd faktura-app <span style="background:linear-gradient(135deg,#3b82f6,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">fra bunnen av</span></h3>
@@ -753,27 +736,27 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path><path d="M8 8h8"></path><path d="M8 12h8"></path></svg>
             </div>
             <div style="font-size:15px; font-weight:700; color:#F1F5F9; margin-bottom:4px;">Enklere fakturering</div>
-            <div style="font-size:12px; color:#64748B; line-height:1.4;">Alt samlet på ett sted — opprett, send og arkiver</div>
+            <div style="font-size:12px; color:#8A9BB5; line-height:1.4;">Alt samlet på ett sted — opprett, send og arkiver</div>
           </div>
           <div style="background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.12); border-radius:14px; padding:24px; text-align:center;">
             <div style="width:40px; height:40px; margin:0 auto 12px; border-radius:10px; background:rgba(34,211,238,0.12); display:flex; align-items:center; justify-content:center;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
             </div>
             <div style="font-size:15px; font-weight:700; color:#F1F5F9; margin-bottom:4px;">Kortere tid</div>
-            <div style="font-size:12px; color:#64748B; line-height:1.4;">Fra opprettelse til sendt på sekunder</div>
+            <div style="font-size:12px; color:#8A9BB5; line-height:1.4;">Fra opprettelse til sendt på sekunder</div>
           </div>
           <div style="background:rgba(37,99,235,0.06); border:1px solid rgba(37,99,235,0.12); border-radius:14px; padding:24px; text-align:center;">
             <div style="width:40px; height:40px; margin:0 auto 12px; border-radius:10px; background:rgba(34,211,238,0.12); display:flex; align-items:center; justify-content:center;">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg>
             </div>
             <div style="font-size:15px; font-weight:700; color:#F1F5F9; margin-bottom:4px;">Telefon og PC</div>
-            <div style="font-size:12px; color:#64748B; line-height:1.4;">Fungerer like godt på mobil som desktop</div>
+            <div style="font-size:12px; color:#8A9BB5; line-height:1.4;">Fungerer like godt på mobil som desktop</div>
           </div>
         </div>
 
         <!-- Tech stack tag -->
         <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:11px; font-weight:600; color:#475569; letter-spacing:0.04em;">Bygget med:</span>
+          <span style="font-size:11px; font-weight:600; color:#7C8DA8; letter-spacing:0.04em;">Bygget med:</span>
           <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <span style="font-size:11px; font-weight:600; color:#94A3B8; background:rgba(148,163,184,0.08); border:1px solid rgba(148,163,184,0.1); padding:4px 10px; border-radius:6px;">HTML</span>
             <span style="font-size:11px; font-weight:600; color:#94A3B8; background:rgba(148,163,184,0.08); border:1px solid rgba(148,163,184,0.1); padding:4px 10px; border-radius:6px;">EmailJS</span>
@@ -795,9 +778,9 @@
   <!-- Chat widget overlay -->
   <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; bottom:24px; right:24px; z-index:999; width:380px; max-width:calc(100vw - 48px); animation:gSlideIn .4s cubic-bezier(.16,1,.3,1) both;">
-      <div style="background:#0A0E1A; border:1px solid #1E2D4A; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px -20px rgba(0,0,0,0.9), 0 0 40px rgba(34,211,238,0.08);">
+      <div style="background:#112038; border:1px solid #2B4469; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px -20px rgba(0,0,0,0.9), 0 0 40px rgba(34,211,238,0.08);">
         <!-- Chat header -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:#0D1220; border-bottom:1px solid #141a28;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:#132541; border-bottom:1px solid #1D2E48;">
           <div style="display:flex; align-items:center; gap:10px;">
             <div style="width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none;">
               <svg viewBox="0 0 100 100" width="18" height="18"><circle cx="50" cy="50" r="33" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44" width="24" height="12" rx="6" fill="#fff"></rect></svg>
@@ -810,7 +793,7 @@
               </div>
             </div>
           </div>
-          <button onclick="{{ closeChat }}" style="width:32px; height:32px; border:none; background:rgba(148,163,184,0.08); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#64748B; transition:color .2s, background .2s;" style-hover="width:32px; height:32px; border:none; background:rgba(148,163,184,0.16); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#F1F5F9;">
+          <button onclick="{{ closeChat }}" style="width:32px; height:32px; border:none; background:rgba(148,163,184,0.08); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#8A9BB5; transition:color .2s, background .2s;" style-hover="width:32px; height:32px; border:none; background:rgba(148,163,184,0.16); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#F1F5F9;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
           </button>
         </div>
@@ -822,7 +805,7 @@
             <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;">
               <svg viewBox="0 0 100 100" width="14" height="14"><circle cx="50" cy="50" r="33" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44" width="24" height="12" rx="6" fill="#fff"></rect></svg>
             </div>
-            <div style="background:#111827; border:1px solid #1E2D4A; border-radius:14px 14px 14px 4px; padding:14px 16px; max-width:280px;">
+            <div style="background:#172A45; border:1px solid #2B4469; border-radius:14px 14px 14px 4px; padding:14px 16px; max-width:280px;">
               <span style="font-size:14px; line-height:1.55; color:#E2E8F0;">Hei! 👋 Spør hva du lurer på om oss — jeg svarer med en gang!</span>
             </div>
           </div>
@@ -841,7 +824,7 @@
                 <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;">
                   <svg viewBox="0 0 100 100" width="14" height="14"><circle cx="50" cy="50" r="33" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44" width="24" height="12" rx="6" fill="#fff"></rect></svg>
                 </div>
-                <div style="background:#111827; border:1px solid #1E2D4A; border-radius:14px 14px 14px 4px; padding:14px 16px; max-width:280px;">
+                <div style="background:#172A45; border:1px solid #2B4469; border-radius:14px 14px 14px 4px; padding:14px 16px; max-width:280px;">
                   <span style="font-size:14px; line-height:1.55; color:#E2E8F0;">{{ msg.text }}</span>
                 </div>
               </div>
@@ -854,11 +837,11 @@
               <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; flex:none; margin-top:2px;">
                 <svg viewBox="0 0 100 100" width="14" height="14"><circle cx="50" cy="50" r="33" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44" width="24" height="12" rx="6" fill="#fff"></rect></svg>
               </div>
-              <div style="background:#111827; border:1px solid #1E2D4A; border-radius:14px 14px 14px 4px; padding:14px 18px;">
+              <div style="background:#172A45; border:1px solid #2B4469; border-radius:14px 14px 14px 4px; padding:14px 18px;">
                 <div style="display:flex; gap:5px; align-items:center;">
-                  <span style="width:7px; height:7px; border-radius:50%; background:#475569; animation:gGlowPulse 1s ease-in-out infinite;"></span>
-                  <span style="width:7px; height:7px; border-radius:50%; background:#475569; animation:gGlowPulse 1s ease-in-out 0.2s infinite;"></span>
-                  <span style="width:7px; height:7px; border-radius:50%; background:#475569; animation:gGlowPulse 1s ease-in-out 0.4s infinite;"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#7C8DA8; animation:gGlowPulse 1s ease-in-out infinite;"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#7C8DA8; animation:gGlowPulse 1s ease-in-out 0.2s infinite;"></span>
+                  <span style="width:7px; height:7px; border-radius:50%; background:#7C8DA8; animation:gGlowPulse 1s ease-in-out 0.4s infinite;"></span>
                 </div>
               </div>
             </div>
@@ -869,16 +852,16 @@
         <sc-if value="{{ showSuggestions }}" hint-placeholder-val="{{ true }}">
           <div style="padding:0 20px 16px; display:flex; flex-wrap:wrap; gap:8px;">
             <sc-for list="{{ suggestions }}" as="sug" hint-placeholder-count="4">
-              <button onclick="{{ sug.onClick }}" style="padding:8px 14px; border:1px solid #1E2D4A; border-radius:999px; font:inherit; font-size:13px; font-weight:500; cursor:pointer; color:#94A3B8; background:transparent; transition:border-color .2s, color .2s;" style-hover="padding:8px 14px; border:1px solid #22D3EE; border-radius:999px; font:inherit; font-size:13px; font-weight:500; cursor:pointer; color:#22D3EE; background:rgba(34,211,238,0.06);">{{ sug.label }}</button>
+              <button onclick="{{ sug.onClick }}" style="padding:8px 14px; border:1px solid #2B4469; border-radius:999px; font:inherit; font-size:13px; font-weight:500; cursor:pointer; color:#94A3B8; background:transparent; transition:border-color .2s, color .2s;" style-hover="padding:8px 14px; border:1px solid #22D3EE; border-radius:999px; font:inherit; font-size:13px; font-weight:500; cursor:pointer; color:#22D3EE; background:rgba(34,211,238,0.06);">{{ sug.label }}</button>
             </sc-for>
           </div>
         </sc-if>
 
         <!-- Input bar -->
-        <div style="display:flex; align-items:center; gap:10px; padding:14px 16px; border-top:1px solid #141a28; background:#0D1220;">
-          <input type="text" value="{{ chatInput }}" oninput="{{ onChatInput }}" onkeydown="{{ onChatKeyDown }}" placeholder="Skriv en melding …" style="flex:1; padding:12px 16px; background:#0A0E18; border:1px solid #1E2D4A; border-radius:12px; color:#F1F5F9; font:inherit; font-size:14px; outline:none; transition:border-color .2s;" style-focus="flex:1; padding:12px 16px; background:#0A0E18; border:1px solid #22D3EE; border-radius:12px; color:#F1F5F9; font:inherit; font-size:14px; outline:none; box-shadow:0 0 0 2px rgba(34,211,238,0.1);">
+        <div style="display:flex; align-items:center; gap:10px; padding:14px 16px; border-top:1px solid #1D2E48; background:#132541;">
+          <input type="text" value="{{ chatInput }}" oninput="{{ onChatInput }}" onkeydown="{{ onChatKeyDown }}" placeholder="Skriv en melding …" style="flex:1; padding:12px 16px; background:#0F1C31; border:1px solid #2B4469; border-radius:12px; color:#F1F5F9; font:inherit; font-size:14px; outline:none; transition:border-color .2s;" style-focus="flex:1; padding:12px 16px; background:#0F1C31; border:1px solid #22D3EE; border-radius:12px; color:#F1F5F9; font:inherit; font-size:14px; outline:none; box-shadow:0 0 0 2px rgba(34,211,238,0.1);">
           <button onclick="{{ sendChat }}" style="width:42px; height:42px; border:none; border-radius:12px; background:linear-gradient(135deg,#2563EB,#22D3EE); cursor:pointer; display:flex; align-items:center; justify-content:center; flex:none; transition:transform .2s;" style-hover="width:42px; height:42px; border:none; border-radius:12px; background:linear-gradient(135deg,#2563EB,#22D3EE); cursor:pointer; display:flex; align-items:center; justify-content:center; flex:none; transform:scale(1.06);" style-active="width:42px; height:42px; border:none; border-radius:12px; background:linear-gradient(135deg,#2563EB,#22D3EE); cursor:pointer; display:flex; align-items:center; justify-content:center; flex:none; transform:scale(0.95);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#05070F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"></path><path d="m22 2-11 11"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"></path><path d="m22 2-11 11"></path></svg>
           </button>
         </div>
       </div>
@@ -894,49 +877,64 @@
   <section id="prosess" data-section="" style="max-width:1200px; margin:0 auto; padding:110px 32px;">
     <div style="margin-bottom:54px; animation:gReveal both; animation-timeline:view(); animation-range:entry 0% cover 24%;">
       <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:16px;">Slik fungerer det</div>
-      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:620px;">Tre steg fra rutinearbeid til ro.</h2>
+      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:620px;">Tre steg. <span style="background:linear-gradient(135deg,#3b82f6,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">Ett minutt for deg.</span></h2>
     </div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;">
-      <div style="border:1px solid #1A2030; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
+      <div style="border:1px solid #22365A; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
         <!-- Scan line -->
         <div style="position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:16px;"><div style="position:absolute; left:0; right:0; height:40px; background:linear-gradient(180deg,transparent,rgba(34,211,238,0.06),transparent); animation:gScanLine 4s linear infinite;"></div></div>
         <div style="font-size:54px; font-weight:900; letter-spacing:-0.04em; background:linear-gradient(135deg,#2563EB,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; margin-bottom:18px;">01</div>
-        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Kartlegg</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Vi går gjennom arbeidsflyten din og finner det som tar mest tid — og som lar seg automatisere trygt.</p>
+        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Ta befaringen</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Gjør det du alltid gjør. Skriv mål og notater, og ta noen bilder av det som skal gjøres.</p>
       </div>
-      <div style="border:1px solid #1A2030; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out 1.3s infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
+      <div style="border:1px solid #22365A; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out 1.3s infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
         <div style="position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:16px;"><div style="position:absolute; left:0; right:0; height:40px; background:linear-gradient(180deg,transparent,rgba(34,211,238,0.06),transparent); animation:gScanLine 4s linear 1.3s infinite;"></div></div>
         <div style="font-size:54px; font-weight:900; letter-spacing:-0.04em; background:linear-gradient(135deg,#2563EB,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; margin-bottom:18px;">02</div>
-        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Bygg</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Vi utvikler og tester automasjonen mot dine systemer, med deg i loopen til alt sitter.</p>
+        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Send det til meg</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Ta bilde av lappen og send den sammen med bildene på SMS eller e-post. Det tar ett minutt.</p>
       </div>
-      <div style="border:1px solid #1A2030; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out 2.6s infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
+      <div style="border:1px solid #22365A; border-radius:16px; padding:32px; position:relative; overflow:hidden; animation:gBorderGlow 4s ease-in-out 2.6s infinite; transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-6px); box-shadow:0 20px 50px -16px rgba(34,211,238,0.2);">
         <div style="position:absolute; inset:0; overflow:hidden; pointer-events:none; border-radius:16px;"><div style="position:absolute; left:0; right:0; height:40px; background:linear-gradient(180deg,transparent,rgba(34,211,238,0.06),transparent); animation:gScanLine 4s linear 2.6s infinite;"></div></div>
         <div style="font-size:54px; font-weight:900; letter-spacing:-0.04em; background:linear-gradient(135deg,#2563EB,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1; margin-bottom:18px;">03</div>
-        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Automatiser</h3>
-        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Du kjører videre og sparer tid — vi overvåker, forbedrer og støtter underveis.</p>
+        <h3 style="font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:10px;">Få tilbudet samme kveld</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#94A3B8;">Du får en ferdig PDF med ditt navn og dine priser. Du sjekker den, og du sender den til kunden selv.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ===================== DET SOM KOMMER ===================== -->
+  <section id="kommer" data-section="" style="max-width:1200px; margin:0 auto; padding:40px 32px 110px;">
+    <div style="margin-bottom:40px; animation:gReveal both; animation-timeline:view(); animation-range:entry 0% cover 24%;">
+      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(34,211,238,0.08); border:1px solid rgba(34,211,238,0.2); border-radius:999px; padding:6px 14px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#22D3EE; margin-bottom:18px;">Under utvikling · klar før nyttår</div>
+      <h2 style="font-size:clamp(30px,4vw,44px); font-weight:800; letter-spacing:-0.035em; line-height:1.08; max-width:680px;">Kveldsfri-systemet: <span style="background:linear-gradient(135deg,#3b82f6,#22D3EE); -webkit-background-clip:text; background-clip:text; color:transparent;">snakk inn jobben, få tilbudet på minutter.</span></h2>
+      <p style="font-size:16px; line-height:1.7; color:#94A3B8; max-width:600px; margin-top:16px;">Det jeg gjør for hånd i dag, bygger jeg nå om til en app. De som er med fra starten, får den først, og beholder pilotprisen.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:14px; padding:22px;"><div style="font-size:12px; font-weight:800; color:#22D3EE; margin-bottom:8px;">01</div><div style="font-size:16px; font-weight:700; color:#F1F5F9; margin-bottom:6px;">Snakk inn jobben</div><div style="font-size:13.5px; line-height:1.55; color:#94A3B8;">Hold inne knappen og forklar jobben som til en kollega. «Ny terrasse fem ganger fem, skruefundament …»</div></div>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:14px; padding:22px;"><div style="font-size:12px; font-weight:800; color:#22D3EE; margin-bottom:8px;">02</div><div style="font-size:16px; font-weight:700; color:#F1F5F9; margin-bottom:6px;">Ta 2–6 bilder</div><div style="font-size:13.5px; line-height:1.55; color:#94A3B8;">Skriv mål rett på bildet om du vil. Trykk «Lag tilbud».</div></div>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:14px; padding:22px;"><div style="font-size:12px; font-weight:800; color:#22D3EE; margin-bottom:8px;">03</div><div style="font-size:16px; font-weight:700; color:#F1F5F9; margin-bottom:6px;">Se over og juster</div><div style="font-size:13.5px; line-height:1.55; color:#94A3B8;">Tilbudet vises ferdig. Det systemet har gjettet, er merket. Du justerer timer med pluss og minus.</div></div>
+      <div style="background:#12223B; border:1px solid #22365A; border-radius:14px; padding:22px;"><div style="font-size:12px; font-weight:800; color:#22D3EE; margin-bottom:8px;">04</div><div style="font-size:16px; font-weight:700; color:#F1F5F9; margin-bottom:6px;">Send og følg opp</div><div style="font-size:13.5px; line-height:1.55; color:#94A3B8;">Send på e-post eller SMS i ditt navn. Du får beskjed når kunden har åpnet og godtatt.</div></div>
     </div>
   </section>
 
   <!-- ===================== OM / GRUNNLEGGER ===================== -->
   <section data-section="" style="max-width:1200px; margin:0 auto; padding:40px 32px 110px;">
-    <div style="background:linear-gradient(135deg,#0A1228,#0D1017); border:1px solid #1E2D4A; border-radius:22px; padding:clamp(32px,5vw,56px); display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:44px; align-items:center;">
+    <div style="background:linear-gradient(135deg,#13284A,#12223B); border:1px solid #2B4469; border-radius:22px; padding:clamp(32px,5vw,56px); display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:44px; align-items:center;">
       <div>
         <div style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#06B6D4; margin-bottom:18px;">Bak Gardner Solutions</div>
-        <h2 style="font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-0.03em; line-height:1.12; margin-bottom:18px;">Et enkeltpersonforetak fra Stavanger med fokus på det som faktisk virker.</h2>
-        <p style="font-size:15.5px; line-height:1.7; color:#94A3B8; margin-bottom:14px;">Gardner Solutions bygger praktisk AI-automatisering for små og mellomstore bedrifter. Ingen hype — bare systemer som sparer deg for tid, og som du forstår.</p>
-        <p style="font-size:15.5px; line-height:1.7; color:#94A3B8;">Korte beslutningsveier, tett samarbeid, og kode som er bygget for å vare.</p>
+        <h2 style="font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-0.03em; line-height:1.12; margin-bottom:18px;">Fra tømrerfag til tilbud som skriver seg selv.</h2>
+        <p style="font-size:15.5px; line-height:1.7; color:#94A3B8; margin-bottom:14px;">Jeg heter Lucas og gikk tømrerfag på Jåttå. Jeg vet hvordan en befaring foregår, og hva et tilbud må inneholde.</p>
+        <p style="font-size:15.5px; line-height:1.7; color:#94A3B8;">Nå bygger jeg Kveldsfri gjennom Gardner Solutions, mitt firma i Stavanger. Du får én person å forholde deg til, og et svar samme dag.</p>
       </div>
       <div style="display:flex; flex-direction:column; align-items:flex-start; gap:20px;">
         <div style="display:flex; align-items:center; gap:16px;">
-          <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#05070F; flex:none;">LG</div>
+          <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,#2563EB,#22D3EE); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#0B1628; flex:none;">LG</div>
           <div>
             <div style="font-size:18px; font-weight:700; letter-spacing:-0.02em;">Lucas Longum-Gardner</div>
             <div style="font-size:13.5px; color:#22D3EE; font-weight:600; margin-top:2px;">Founder &amp; Developer</div>
           </div>
         </div>
-        <div style="height:1px; width:100%; background:#1A2030;"></div>
+        <div style="height:1px; width:100%; background:#22365A;"></div>
         <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#94A3B8;">
           <div style="display:flex; align-items:center; gap:11px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg><span><span>lucas</span><span>@gardnersolutions.no</span></span></div>
           <div style="display:flex; align-items:center; gap:11px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span>gardnersolutions.no</span></div>
@@ -975,23 +973,26 @@
         <div style="position:absolute; inset:-36px; border-radius:50%; border:1px solid rgba(34,211,238,0.06); animation:gArcPulse 3s ease-in-out 1s infinite;"></div>
         <svg viewBox="0 0 100 100" width="80" height="80"><defs><linearGradient id="ctaG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"></stop><stop offset="1" stop-color="#22d3ee"></stop></linearGradient></defs><circle cx="50" cy="50" r="33" fill="none" stroke="url(#ctaG)" stroke-width="11" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44.5" width="24" height="11" rx="5.5" fill="url(#ctaG)"></rect></svg>
       </div>
-      <h2 style="font-size:clamp(30px,4.4vw,48px); font-weight:800; letter-spacing:-0.04em; line-height:1.06; margin-bottom:18px;">Klar til å fjerne rutinearbeidet?</h2>
-      <p style="font-size:17px; line-height:1.65; color:#94A3B8; margin-bottom:32px;">Ta en uforpliktende prat. Vi finner ut hva som er verdt å automatisere først.</p>
-      <a href="mailto:lucas@gardnersolutions.no" style="display:inline-flex; align-items:center; gap:10px; font-size:16px; font-weight:700; color:#05070F; background:linear-gradient(135deg,#2563EB,#22D3EE); padding:17px 34px; border-radius:13px; text-decoration:none; box-shadow:0 16px 40px -12px rgba(34,211,238,0.55);">
-        Send en e-post
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-      </a>
+      <h2 style="font-size:clamp(30px,4.4vw,48px); font-weight:800; letter-spacing:-0.04em; line-height:1.06; margin-bottom:18px;">Har du en befaring denne uka?</h2>
+      <p style="font-size:17px; line-height:1.65; color:#94A3B8; margin-bottom:32px;">Send meg notatene og bildene, så får du tilbudet samme kveld. Det første er gratis.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="sms:+4746320132" style="font-size:15px; font-weight:700; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); padding:15px 28px; border-radius:12px; text-decoration:none; box-shadow:0 14px 34px -10px rgba(245,158,11,0.45);">Send meg befaringen på SMS</a>
+        <a href="tel:+4746320132" style="font-size:15px; font-weight:700; color:#E2E8F0; border:1px solid #2B4469; padding:15px 26px; border-radius:12px; text-decoration:none;">Ring 463 20 132</a>
+        <a href="mailto:lucas@gardnersolutions.no?subject=Kveldsfri" style="font-size:15px; font-weight:700; color:#E2E8F0; border:1px solid #2B4469; padding:15px 26px; border-radius:12px; text-decoration:none;">Send e-post</a>
+      </div>
     </div>
   </section>
 
+
+  <a data-sticky-cta="" href="sms:+4746320132" style="display:none; position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom, 0px)); z-index:60; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:14px; font-size:16px; font-weight:800; text-decoration:none; color:#1A1206; background:linear-gradient(135deg,#F59E0B,#FCD34D); box-shadow:0 18px 40px -12px rgba(0,0,0,0.7);">Send meg neste befaring <span style="font-weight:600; opacity:0.75;">· gratis</span></a>
   <!-- ===================== FOOTER ===================== -->
-  <footer data-footer="" style="border-top:1px solid #11151f; padding:48px 32px;">
+  <footer data-footer="" style="border-top:1px solid #1C2C45; padding:48px 32px;">
     <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
       <div style="display:flex; align-items:center; gap:11px;">
         <svg viewBox="0 0 100 100" width="30" height="30"><defs><linearGradient id="ftG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b82f6"></stop><stop offset="1" stop-color="#22d3ee"></stop></linearGradient></defs><circle cx="50" cy="50" r="33" fill="none" stroke="url(#ftG)" stroke-width="11" stroke-linecap="round" stroke-dasharray="160 47.4" transform="rotate(32 50 50)"></circle><rect x="50" y="44.5" width="24" height="11" rx="5.5" fill="url(#ftG)"></rect></svg>
         <span style="font-size:15px; font-weight:800; letter-spacing:-0.03em;">Gardner <span style="color:#22D3EE; font-weight:700;">Solutions</span></span>
       </div>
-      <div style="font-size:12.5px; color:#475569;">Longum-Gardner Solutions ENK · Stavanger · 2026</div>
+      <div style="font-size:12.5px; color:#7C8DA8;">Longum-Gardner Solutions ENK · Stavanger · 2026</div>
     </div>
   </footer>
 
@@ -1091,7 +1092,7 @@ class Component extends DCLogic {
       chatTyping: s.chatTyping,
       showSuggestions: s.showSuggestions && !s.chatTyping,
       suggestions: suggestions,
-      chatBubbleVisible: !s.chatOpen,
+      chatBubbleVisible: false,
       openChat: function() { self.openChat(); },
       closeChat: function() { self.closeChat(); },
       toggleChat: function() { self.toggleChat(); },
@@ -1127,6 +1128,7 @@ class Component extends DCLogic {
 
       var cBlue = new THREE.Color('#3b82f6');
       var cCyan = new THREE.Color('#22d3ee');
+      var cWarm = new THREE.Color('#fbbf24');
 
       // Glow dot texture
       var dotCanvas = document.createElement('canvas');
@@ -1221,7 +1223,7 @@ class Component extends DCLogic {
       var fireGeo = new THREE.BufferGeometry();
       var firePos = new Float32Array(fireCount * 3);
       fireGeo.setAttribute('position', new THREE.BufferAttribute(firePos, 3));
-      var fireMat = new THREE.PointsMaterial({ size: 0.7, map: fireTex, color: cCyan, transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending });
+      var fireMat = new THREE.PointsMaterial({ size: 0.7, map: fireTex, color: cWarm, transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending });
       var firePts = new THREE.Points(fireGeo, fireMat);
       group.add(firePts);
 
@@ -1231,7 +1233,7 @@ class Component extends DCLogic {
       var corePt = new THREE.Points(coreGeo, coreMat);
       group.add(corePt);
       var coreGeo2 = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0.3,0)]);
-      var coreMat2 = new THREE.PointsMaterial({ size: 22, map: dotTex, color: cCyan, transparent: true, opacity: 0.7, depthWrite: false, blending: THREE.AdditiveBlending });
+      var coreMat2 = new THREE.PointsMaterial({ size: 22, map: dotTex, color: cWarm, transparent: true, opacity: 0.7, depthWrite: false, blending: THREE.AdditiveBlending });
       group.add(new THREE.Points(coreGeo2, coreMat2));
 
       // Spinal cord
