@@ -139,15 +139,15 @@ h2 { font-size: clamp(36px, 4.8vw, 64px); color: var(--tekst-lys); }
 }
 @keyframes hero-inn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
-/* Mobil: bildet øverst med lampe og bord, teksten under */
+/* Mobil: bildet over hele skjermen, teksten oppå nederst */
 @media (max-width: 860px) {
-  .hero { display: block; min-height: 0; padding: var(--topp) 0 64px; background: var(--nattsvart); }
-  .hero > img { position: relative; inset: auto; height: 46svh; min-height: 280px; max-height: 460px; object-position: 46% 60%; z-index: auto; }
-  .hero::after { display: none; }
+  .hero { min-height: 100svh; align-items: flex-end; padding: calc(var(--topp) + 24px) 0 44px; }
+  .hero > img { object-position: 38% 50%; }
+  .hero::after { background: rgba(23, 21, 19, 0.52); }
   .hero .innhold { display: block; }
-  .hero-tekst { width: auto; margin-top: 36px; }
+  .hero-tekst { width: auto; }
   .hero h1 { font-size: clamp(36px, 9.6vw, 56px); }
-  .hero .valg { flex-direction: column; align-items: stretch; gap: 22px; }
+  .hero .valg { flex-direction: column; align-items: stretch; gap: 8px; }
   .hero .lenke { align-self: flex-start; }
 }
 
@@ -291,7 +291,7 @@ h2 { font-size: clamp(36px, 4.8vw, 64px); color: var(--tekst-lys); }
 .glider input[type=range]::-moz-range-progress { height: 2px; background: var(--nattsvart); }
 .glider input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -13px; border-radius: 50%; background: var(--nattsvart); border: 4px solid var(--sement); box-shadow: 0 0 0 1px var(--nattsvart); }
 .glider input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--nattsvart); border: 4px solid var(--sement); box-shadow: 0 0 0 1px var(--nattsvart); }
-.resultat > div { padding: 26px 0 30px; border-top: 1px solid var(--betong); }
+.tall-boks > div { padding: 26px 0 30px; border-top: 1px solid var(--betong); }
 .resultat .tall { display: block; white-space: nowrap; font-size: clamp(52px, 7vw, 104px); font-weight: 300; letter-spacing: -0.04em; line-height: 1; }
 #r-kroner { font-size: clamp(38px, 4.6vw, 76px); letter-spacing: -0.03em; }
 .resultat .hva { display: block; margin-top: 12px; font-size: 17px; color: var(--grafitt); }
@@ -424,7 +424,7 @@ details[open] .tegn::after { display: none; }
 
 /* ---------- Mobil (iPhone, ca. 390 px): lesbarhet og tommelvennlig ---------- */
 @media (max-width: 640px) {
-  :root { --seksjon: 76px; --side: 20px; }
+  :root { --seksjon: 60px; --side: 20px; }
   body { font-size: 17px; line-height: 1.6; }
   h2 { font-size: 34px; line-height: 1.1; }
   .ingress { margin-top: 16px; font-size: 18px; }
@@ -436,7 +436,7 @@ details[open] .tegn::after { display: none; }
   .lenke { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; border-bottom: 0; text-decoration: underline; text-decoration-color: var(--messing); text-underline-offset: 6px; text-decoration-thickness: 1px; }
 
   /* Hero */
-  .hero-tekst { margin-top: 28px; }
+  .hero-tekst { margin-top: 0; }
   .hero h1 { font-size: 38px; line-height: 1.06; }
   .hero p { margin-top: 20px; font-size: 17px; }
   .hero .valg { margin-top: 28px; gap: 8px; }
@@ -448,7 +448,7 @@ details[open] .tegn::after { display: none; }
   .situasjoner p { margin-top: 8px; font-size: 17px; }
 
   /* Garantien */
-  .garanti.foto { padding: 96px 0; }
+  .garanti.foto { padding: 80px 0; }
   .garanti .strek { margin-bottom: 28px; }
   .garanti .stor { font-size: 31px; line-height: 1.15; }
   .garanti .liten { margin-top: 20px; font-size: 18px; }
@@ -477,10 +477,19 @@ details[open] .tegn::after { display: none; }
   .glider input[type=range] { height: 48px; margin-top: 8px; touch-action: pan-y; }
   .glider input[type=range]::-webkit-slider-thumb { width: 36px; height: 36px; margin-top: -17px; }
   .glider input[type=range]::-moz-range-thumb { width: 30px; height: 30px; }
-  .resultat > div { padding: 22px 0 24px; }
-  .resultat .tall { font-size: 56px; }
-  #r-kroner { font-size: 40px; }
-  .resultat .hva { font-size: 16px; margin-top: 8px; }
+  /* Resultatet står fast øverst mens man drar i bryterne */
+  .kalk { display: flex; flex-direction: column; gap: 0; margin-top: 24px; }
+  .resultat { display: contents; }
+  .tall-boks { width: 100%; order: -1; position: sticky; top: var(--topp); z-index: 2; display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; padding: 14px 0 12px; background: var(--sement); border-bottom: 1px solid var(--nattsvart); }
+  .tall-boks > div { padding: 0; border-top: 0; }
+  .resultat .tall { font-size: 38px; }
+  #r-kroner { font-size: 30px; line-height: 1.27; }
+  .resultat .hva { font-size: 16px; margin-top: 4px; }
+  .glider { padding: 16px 0 6px; }
+  .glider:first-child { border-top: 0; }
+  .glider input[type=range] { margin-top: 2px; }
+  .kalk-bunn { padding-top: 24px; }
+  .resultat .merk { margin-top: 0; }
 
   /* Lister */
   .bygger li { font-size: 22px; padding: 20px 0; }
