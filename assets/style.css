@@ -524,3 +524,6 @@ details[open] .tegn::after { display: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* Skjulte elementer skal alltid være skjult (f.eks. skjemaet etter innsending) */
+[hidden] { display: none !important; }
